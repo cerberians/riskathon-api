@@ -1,0 +1,27 @@
+#application:
+#  front-end-host: localhost:5000
+
+server:
+  port: 20000
+  servletPath: / # see spring.mvc.servlet.path
+
+logging:
+  level:
+#    org.springframework.transaction: TRACE
+    lu.cerberians.sollist.HelloMapper: DEBUG
+
+spring:
+  datasource:
+    driver-class-name: org.neo4j.jdbc.bolt.BoltDriver
+    url: jdbc:neo4j:bolt://127.0.0.1:7687/?nossl
+    username: neo4j
+    password: ENC(lhywOKcAlwVSg2R7QmBJOthDy7GS8a0s)
+  jersey:
+    applicationPath: /api
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    servlet:
+      path: /
+
+jasypt.encryptor.password: ${JASYPT_ENCRYPTOR_PASSWORD}

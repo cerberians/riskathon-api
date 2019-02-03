@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: jdbc:neo4j:bolt://riskathon-neo4j:7687/?nossl
