@@ -45,7 +45,7 @@ public class JerseyConfig extends ResourceConfig {
                 .contact(new Contact()
                         .email("florian.sey+cerberians@gmail.com"))
                 .license(new License()
-                        .name("Totem HR")
+                        .name("Cerberians")
                         .url("https://riskathon.seventythree.io"));
         oas.info(info);
 

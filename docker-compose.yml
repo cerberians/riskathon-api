@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  riskathon-api:
+    environment:
+      - ENVIRONMENT=${APP_ENVIRONMENT}
+      - JASYPT_ENCRYPTOR_PASSWORD
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    image: cerberians/riskathon-api:1.0.0-${APP_ENVIRONMENT}
+    container_name: ${COMPOSE_PROJECT_NAME}_riskathon-api
+    ports:
+      - ${API_PORT_MAPPING}
+    depends_on:
+      - riskathon-neo4j
+    restart: always
+    networks:
+      - riskathon-nw
+  riskathon-neo4j:
+    environment:
+      NEO4J_AUTH: ${NEO4J_USERNAME}/${NEO4J_PASSWORD}
+    build:
+      context: .
+      dockerfile: Dockerfile-neo4j
+    image: cerberians/riskathon-neo4j:1.0.0-${APP_ENVIRONMENT}
+    container_name: ${COMPOSE_PROJECT_NAME}_riskathon-neo4j
+    ports:
+      - ${NEO4J_HTTP_PORT_MAPPING}
+      - ${NEO4J_BOLT_PORT_MAPPING}
+    volumes:
+      - type: volume
+        source: riskathon-neo4j-data
+        target: /data
+        volume:
+          nocopy: true
+    restart: always
+    networks:
+      - riskathon-nw
+  riskathon-neo4j-seed:
+    environment:
+      - NEO4J_USERNAME
+      - NEO4J_PASSWORD
+    build:
+      context: .
+      dockerfile: Dockerfile-neo4j-seed
+    image: cerberians/riskathon-neo4j-seed:1.0.0-${APP_ENVIRONMENT}
+    container_name: ${COMPOSE_PROJECT_NAME}_riskathon-neo4j-seed
+    depends_on:
+      - riskathon-neo4j
+    networks:
+      - riskathon-nw
+networks:
+  riskathon-nw:
+    driver: bridge
+volumes:
+  riskathon-neo4j-data:

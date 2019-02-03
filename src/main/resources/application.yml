@@ -1,13 +1,14 @@
-application:
-  front-end-host: localhost:5000
+#application:
+#  front-end-host: localhost:5000
 
 server:
   port: 20000
   servletPath: / # see spring.mvc.servlet.path
 
-#logging:
-#  level:
+logging:
+  level:
 #    org.springframework.transaction: TRACE
+    lu.cerberians.sollist.HelloMapper: DEBUG
 
 spring:
   datasource:

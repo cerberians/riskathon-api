@@ -1,0 +1,48 @@
+FROM neo4j:3.4.0
+MAINTAINER florian.sey@gmail.com
+
+COPY files/*.jar /var/lib/neo4j/plugins/
+# COPY data/*.csv /var/lib/neo4j/import/
+
+# https://neo4j-contrib.github.io/neo4j-apoc-procedures/
+# Procedures that use internal APIs have to be allowed
+ENV NEO4J_dbms_security_procedures_unrestricted=apoc.*,ga.timetree.*
+
+# Change memory size
+ENV NEO4J_dbms_memory_heap_initial__size=1300m
+ENV NEO4J_dbms_memory_heap_max__size=1300m
+ENV NEO4J_dbms_memory_pagecache_size=512m
+
+# https://github.com/graphaware/neo4j-timetree
+# For the framework to work at all, you need this
+ENV NEO4J_dbms_unmanaged__extension__classes=com.graphaware.server=/graphaware
+
+# Runtime must be enabled like this
+ENV NEO4J_com_graphaware_runtime_enabled=true
+
+# A Runtime module that takes care of attaching the events like this (TT is the ID of the module)
+ENV NEO4J_com_graphaware_module_TT_1=com.graphaware.module.timetree.module.TimeTreeModuleBootstrapper
+
+# autoAttach must be set to true
+ENV NEO4J_com_graphaware_module_TT_autoAttach=true
+
+# Optionally, nodes which represent events and should be attached automatically have to be defined (defaults to nodes with label Event)
+# ENV NEO4J_com_graphaware_module_TT_event=hasLabel('Email')
+
+# Optionally, a property on the event nodes that represents the the time (long) at which the event took place must be specified (defaults to "timestamp")
+# ENV NEO4J_com_graphaware_module_TT_timestamp=time
+
+# Optionally, a property on the event nodes that represents the node ID (long) of the root node for the tree, to which the event should be attached (defaults to "timeTreeRootId")
+# ENV NEO4J_com_graphaware_module_TT_customTimeTreeRootProperty=rootId
+
+# Optionally, a resolution can be specified (defaults to DAY)
+ENV NEO4J_com_graphaware_module_TT_resolution=SECOND
+
+# Optionally, a time zone can be specified (defaults to UTC)
+# ENV NEO4J_com_graphaware_module_TT_timezone=GMT+1
+
+# Optionally, a relationship type with which the events will be attached to the tree can be specified (defaults to AT_TIME)
+# ENV NEO4J_com_graphaware_module_TT_relationship=SENT_ON
+
+# Optionally, a relationship direction (from the tree's point of view), with which the events will be attached to the tree can be specified (defaults to INCOMING)
+# ENV NEO4J_com_graphaware_module_TT_direction=INCOMING
