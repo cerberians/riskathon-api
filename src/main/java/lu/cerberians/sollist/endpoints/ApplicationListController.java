@@ -17,7 +17,6 @@ public class ApplicationListController {
     @RequestMapping("")
     public String newProduct(Model model){
         ApplicationListForm form = new ApplicationListForm();
-        model.addAttribute("applicationListForm", form);
         model.addAttribute("applicationList", form.getApplications());
         return "application_list_form";
     }
@@ -25,14 +24,14 @@ public class ApplicationListController {
     @RequestMapping(value = "/update/soll/{id}")
     public String updateSoll(@PathVariable Long id){
         log.info("the selected soll is ");
-        return "userform";
+        return null;
     }
 
 
     @RequestMapping(value = "/create/soll/{appID}/{assetID}")
     public String createSoll(@PathVariable int appID, @PathVariable int assetID){
         log.info("create soll for appid:" + appID + "assetid:" + assetID);
-        return "userform";
+        return null;
     }
 
 }

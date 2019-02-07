@@ -9,9 +9,9 @@ public class ApplicationListForm {
 
     public ApplicationListForm() {
         this.applications = Arrays.asList(
-new ApplicationsForm(1,1,1,"Dovetail", "database", "data server", "Asset owner 1","","",false, false),
-new ApplicationsForm(2,1,1,"Dovetail", "server1", "application server 1", "Asset owner 2","","",true,true),
-new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset owner 3","","BR3",true, true)
+new ApplicationsForm(1,1,1,"Dovetail", "database", "data server", "Asset owner 1","","",true, false),
+new ApplicationsForm(2,1,1,"Dovetail", "server1", "application server 1", "Asset owner 2","","",false,true),
+new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset owner 3","","BR3",false, true)
 );
     }
 
