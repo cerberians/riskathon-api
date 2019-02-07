@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
 <head>
     <title>Entitlements</title>
 </head>
@@ -10,7 +12,20 @@
     <h1>Entitlements</h1>
 
     <div>
-        No entitlements
+        <table class="table table-hover">
+            <thead>
+            <tr class="tableh">
+                <td>ID</td>
+                <td>Name</td>
+                <td>Privilege</td>
+            </tr>
+            </thead>
+            <tr th:each="entitlement : ${entitlements}">
+                <td th:text="${entitlement.id}"></td>
+                <td th:text="${entitlement.name}"></td>
+                <td th:text="${entitlement.privilege.name}"></td>
+            </tr>
+        </table>
     </div>
 
     <div>
