@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lu.cerberians.sollist.mapper.MatrixMapper">
+
+    <insert id="create">
+        CREATE (m:Matrix {id: #{matrix.id}})
+
+        UNWIND [
+            <foreach collection="constraints" item="item" open="[" separator="," close="]">
+                #{item.id}
+            </foreach>
+        ] as constraintID
+        MATCH (c#{index}:Constraint {id: constraintID})
+        CREATE (m)-[:HAS_CONSTRAINT]->(c)
+    </insert>
+
+</mapper>
