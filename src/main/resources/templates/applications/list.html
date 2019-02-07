@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
-<head>
-    <title>Task List</title>
-    <link rel="stylesheet" href="../css/application_list_form.css">
-</head>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
 <body>
-<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
     <div class="container">
-        <div class="search">
-            Search parameters ...
-        </div>
-        <table class="table table-hover">
-            <thead>
-            <tr class="tableh">
-                <td>Application</td>
-                <td>Asset Name</td>
-                <td>Asset Type</td>
-                <td>Asset Owner</td>
-                <td>Business roles</td>
-                <td>SOLL</td>
-                <td>SOLL/IST</td>
-            </tr>
+        <!--<div class="search">-->
+            <!--Search parameters ...-->
+        <!--</div>-->
+        <table class="table table-hover table-striped">
+            <thead class="indigo darken-4 white-text bold">
+                <tr>
+                    <td>Application</td>
+                    <td>Asset Name</td>
+                    <td>Asset Type</td>
+                    <td>Asset Owner</td>
+                    <td>Business roles</td>
+                    <td>SOLL</td>
+                    <td>SOLL/IST</td>
+                </tr>
             </thead>
-            <tr th:each="app : ${applicationList}">
-                <td th:text="${app.application}"></td>
-                <td th:text="${app.assetName}"></td>
-                <td th:text="${app.assetType}"></td>
-                <td th:text="${app.assetOwner}"></td>
-                <td th:text="${app.businessRole}"></td>
-                <td>
-                    <span th:if="${app.soll}">
-                        <a th:text="${app.soll}" th:href="@{'/applications/update/soll/'+${app.sollId}}"></a>
-                    </span>
-                    <span th:if="${!app.soll}">
-                        <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
-                    </span>
-                </td>
-                <td th:text="${app.sollist}"></td>
-            </tr>
+            <tbody>
+                <tr th:each="app : ${applicationList}">
+                    <td th:text="${app.application}"></td>
+                    <td th:text="${app.assetName}"></td>
+                    <td th:text="${app.assetType}"></td>
+                    <td th:text="${app.assetOwner}"></td>
+                    <td th:text="${app.businessRole}"></td>
+                    <td>
+                        <span th:if="${app.soll}">
+                            <a th:text="${app.soll}" th:href="@{'/applications/update/soll/'+${app.sollId}}"></a>
+                        </span>
+                        <span th:if="${!app.soll}">
+                            <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
+                        </span>
+                    </td>
+                    <td th:text="${app.sollist}"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

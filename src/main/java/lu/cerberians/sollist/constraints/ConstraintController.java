@@ -52,4 +52,10 @@ public class ConstraintController {
         model.addAttribute("constraintList", constraintList);
         return "matrix/list";
     }
+
+    @GetMapping("create")
+    public String createConstraint(Model model) {
+        log.info("here ! ");
+        return "/applications";
+    }
 }

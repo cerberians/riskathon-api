@@ -1,8 +1,7 @@
 package lu.cerberians.sollist;
 
-import lu.cerberians.sollist.constraints.ConstraintsService;
-import lu.cerberians.sollist.entities.*;
 import lu.cerberians.sollist.mapper.*;
+import lu.cerberians.sollist.matrix.MatrixService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -10,37 +9,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.UUID;
 
 @Path("/hello")
 public class HelloResource {
-
-    private HelloService helloService;
 
     private PrivilegeMapper privilegeMapper;
 
     private BusinessRoleMapper businessRoleMapper;
 
-    private ConstraintMapper constraintMapper;
-
-    private AssetFunctionMapper assetFunctionMapper;
-
-    private EntitlementMapper entitlementMapper;
-
-    private ConstraintsService constraintsService;
-
-
-
     @Inject
-    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper,
-                         ConstraintMapper constraintMapper, AssetFunctionMapper assetFunctionMapper, EntitlementMapper entitlementMapper, ConstraintsService constraintsService) {
-        this.helloService = helloService;
+    public HelloResource(PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper) {
         this.privilegeMapper = privilegeMapper;
         this.businessRoleMapper = businessRoleMapper;
-        this.constraintMapper = constraintMapper;
-        this.assetFunctionMapper = assetFunctionMapper;
-        this.entitlementMapper = entitlementMapper;
-        this.constraintsService = constraintsService;
     }
 
     @GET
@@ -55,35 +35,6 @@ public class HelloResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBusinessRoles() {
         return Response.ok().entity(businessRoleMapper.selectAll()).build();
-    }
-
-    @GET
-    @Path("/constraintTest")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getApplications() {
-        final Asset asset = new Asset();
-        asset.setId("1");
-
-        Privilege p1 = new Privilege();
-        p1.setId("p1");
-        p1.setName("p1");
-        privilegeMapper.create(p1);
-
-
-        Entitlement e1 = new Entitlement();
-        e1.setId("e1");
-        e1.setName("e1");
-        e1.setPrivilege(p1);
-        entitlementMapper.create(asset, e1);
-
-
-        AssetFunction af1 = new AssetFunction();
-        af1.setId("af1");
-        af1.setName("af1");
-        assetFunctionMapper.create(asset, af1);
-
-        constraintsService.create(af1.getId(), e1.getId(), true);
-        return Response.ok().build();
     }
 
 }
