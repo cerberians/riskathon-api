@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="lu.cerberians.sollist.mapper.ApplicationMapper">
+<mapper namespace="lu.cerberians.sollist.mapper.AssetMapper">
 
     <select id="selectById">
         MATCH (asset:Asset)
