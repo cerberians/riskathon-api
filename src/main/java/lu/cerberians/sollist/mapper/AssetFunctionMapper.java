@@ -12,5 +12,5 @@ public interface AssetFunctionMapper {
 
     void create(@Param("entity") AssetFunction assetFunction);
 
-    List<Entitlement> getAll();
+    List<AssetFunction> getAll();
 }
