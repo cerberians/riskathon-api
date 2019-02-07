@@ -12,8 +12,8 @@ public class Constraint {
     private Boolean isWhitelist;
 
     // FROM
-    private Entity a;
+    private String aId;
 
     // TO
-    private Entity b;
+    private String bId;
 }

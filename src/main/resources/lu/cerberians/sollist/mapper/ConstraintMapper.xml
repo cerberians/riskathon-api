@@ -9,7 +9,7 @@
 
         WITH c
 
-        MATCH (a:Entity {id: #{constraint.a.id}}), (b:Entity {id: #{constraint.b.id}})
+        MATCH (a:Entity {id: #{constraint.aId}}), (b:Entity {id: #{constraint.bId}})
         CREATE (c)-[:FROM]->(a)
         CREATE (c)-[:TO]->(b)
 
