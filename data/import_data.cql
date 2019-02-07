@@ -28,9 +28,23 @@ MERGE (n:Asset { id: row.id, name: row.name })
   ON MATCH SET n = row
 RETURN 'Asset' as entity, COUNT(n) as count;
 
+LOAD CSV WITH HEADERS FROM 'file:///asset_type.csv'
+AS row WITH row
+MERGE (n:AssetType { id: row.id, name: row.name })
+  ON CREATE SET n = row
+  ON MATCH SET n = row
+RETURN 'AssetType' as entity, COUNT(n) as count;
+
 LOAD CSV WITH HEADERS FROM 'file:///asset.csv'
-AS row WITH ROW
-MATCH (a:Application),(b:Asset)
-  WHERE a.id = row.idApp AND b.id = row.id
-CREATE (a)-[r:HAS_ASSET]->(b)
-RETURN type(r)
+AS row WITH row
+MATCH (app:Application),(as:Asset)
+  WHERE app.id = row.idApp AND as.id = row.id
+CREATE (app)-[rel:HAS_ASSET]->(as)
+RETURN type(rel);
+
+LOAD CSV WITH HEADERS FROM 'file:///asset.csv'
+AS row WITH row
+MATCH (asset:Asset),(type:AssetType)
+  WHERE asset.id = row.id AND type.id = row.idType
+CREATE (asset)-[relation:HAS_TYPE]->(type)
+RETURN type(relation);

@@ -1,16 +1,21 @@
-id,name,idApp
-1,vpluuxdov01,1
-2,DPS1 on vpluora0001,1
-3,vpluswt01,2
-4,SWIFT on vpluora0001,2
-5,SWIFTMSG on vpluora0002,2
-6,vpluswtmsg01,2
-7,vplucyber01,3
-8,vplucyber02,3
-9,vplucyber03,3
-10,vplufir01,4
-11,vplufir02,4
-12,FIRE on vpluora0001,4
-13,vplugtd001,5
-14,vplugtd002,5
-15,GTD on vplugtd001,5
+id,name,idType,idApp
+"16",Dovetail,1,1
+"1",vpluuxdov01,2,1
+"2",DPS1 on vpluora0001,4,1
+"17",Swift,1,2
+"3",vpluswt01,1,2
+"4",SWIFT on vpluora0001,4,2
+"5",SWIFTMSG on vpluora0002,4,2
+"18",CyberArk,1,3
+"6",vpluswtmsg01,1,2
+"7",vplucyber01,1,3
+"8",vplucyber02,1,3
+"9",vplucyber03,1,3
+"19",Fircosoft,1,4
+"10",vplufir01,1,4
+"11",vplufir02,1,4
+"12",FIRE on vpluora0001,4,4
+"20",GTData,1,5
+"13",vplugtd001,1,5
+"14",vpluuxgt02,3,5
+"15",GTD on vplugtd001,4,5
