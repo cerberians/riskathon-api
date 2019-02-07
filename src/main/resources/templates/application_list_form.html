@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Application/Assets list</title>
+    <link rel="stylesheet" href="./css/application_list_form.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<form class="form-horizontal" th:object="${applicationListForm}" th:action="@{/create/soll}" method="post">
+
+    <div class="container">
+        <div class="search">
+            Search parametters ...
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="tableh">
+                <td>Application</td>
+                <td>Asset Name</td>
+                <td>Asset Type</td>
+                <td>Asset Owner</td>
+                <td>IT custodian</td>
+                <td>Business roles</td>
+                <td>SOLL</td>
+                <td>SOLL/IST</td>
+            </tr>
+            </thead>
+            <tr th:each="app : ${applicationList}">
+                <td th:text="${app.application}"></td>
+                <td th:text="${app.assetName}"></td>
+                <td th:text="${app.assetType}"></td>
+                <td th:text="${app.assetOwner}"></td>
+                <td th:text="${app.itCustodian}"></td>
+                <td th:text="${app.businessRole}"></td>
+                <td><a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.appId}+'/'+${app.assetId}}"></a></td>
+                <td th:text="${app.sollist}"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
