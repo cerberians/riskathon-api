@@ -9,14 +9,14 @@
 
         WITH c
 
-        MATCH (a:Entity {id: #{constraint.aId}}), (b:Entity {id: #{constraint.bId}})
+        MATCH (a:Entity {id: #{constraint.from}}), (b:Entity {id: #{constraint.to}})
         CREATE (c)-[:FROM]->(a)
         CREATE (c)-[:TO]->(b)
 
         WITH c
 
         <choose>
-            <when test="constraint.isWhitelist">
+            <when test="constraint.whitelist">
                 MATCH (ct {id:"Whitelist"})
             </when>
             <otherwise>

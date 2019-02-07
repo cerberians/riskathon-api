@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lu.cerberians.sollist.mapper.MatrixMapper">
+
+    <insert id="create">
+        <!-- Create node -->
+        CREATE (m:Matrix {id: #{matrix.id}})
+
+        <!-- Link to asset-->
+        WITH m
+        MATCH (a:Asset {id: #{matrix.asset.id}})
+        CREATE (a)-[:BELONGS_TO]->(m)
+
+        <!-- Link to constraints -->
+        WITH m
+        UNWIND
+            <foreach collection="matrix.constraints" item="item" open="[" separator="," close="]">
+                #{item.id}
+            </foreach>
+        as constraintID
+        MATCH (c:Constraint {id: constraintID})
+        CREATE (m)-[:HAS_CONSTRAINT]->(c)
+    </insert>
+
+</mapper>

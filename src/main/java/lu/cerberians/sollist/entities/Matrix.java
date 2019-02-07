@@ -3,17 +3,15 @@ package lu.cerberians.sollist.entities;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Data
+import java.util.List;
+
 @Accessors(chain = true)
-public class Constraint {
+@Data
+public class Matrix {
 
     private String id;
 
-    private Boolean whitelist;
+    Asset asset;
 
-    // FROM
-    private String from;
-
-    // TO
-    private String to;
+    List<Constraint> constraints;
 }
