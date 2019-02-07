@@ -18,7 +18,6 @@
                 <td>Asset Name</td>
                 <td>Asset Type</td>
                 <td>Asset Owner</td>
-                <td>IT custodian</td>
                 <td>Business roles</td>
                 <td>SOLL</td>
                 <td>SOLL/IST</td>
@@ -29,14 +28,13 @@
                 <td th:text="${app.assetName}"></td>
                 <td th:text="${app.assetType}"></td>
                 <td th:text="${app.assetOwner}"></td>
-                <td th:text="${app.itCustodian}"></td>
                 <td th:text="${app.businessRole}"></td>
                 <td>
                     <span th:if="${app.soll}">
-                        <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.appId}+'/'+${app.assetId}}"></a>
+                        <a th:text="${app.soll}" th:href="@{'/applications/update/soll/'+${app.sollId}}"></a>
                     </span>
                     <span th:if="${!app.soll}">
-                        <span th:text="${app.soll}"></span>
+                        <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
                     </span>
                 </td>
                 <td th:text="${app.sollist}"></td>
