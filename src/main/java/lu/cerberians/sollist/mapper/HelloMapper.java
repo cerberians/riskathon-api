@@ -1,4 +1,4 @@
-package lu.cerberians.sollist;
+package lu.cerberians.sollist.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

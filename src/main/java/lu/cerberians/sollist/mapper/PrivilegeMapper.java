@@ -1,4 +1,4 @@
-package lu.cerberians.sollist;
+package lu.cerberians.sollist.mapper;
 
 import lu.cerberians.sollist.entities.Privilege;
 import org.apache.ibatis.annotations.Mapper;

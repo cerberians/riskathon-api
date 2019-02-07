@@ -1,5 +1,8 @@
 package lu.cerberians.sollist;
 
+import lu.cerberians.sollist.mapper.BusinessRoleMapper;
+import lu.cerberians.sollist.mapper.PrivilegeMapper;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,24 +15,29 @@ public class HelloResource {
 
     private HelloService helloService;
 
-    private PrivilegeMapper mapper;
+    private PrivilegeMapper privilegeMapper;
+
+    private BusinessRoleMapper businessRoleMapper;
 
     @Inject
-    public HelloResource(HelloService helloService, PrivilegeMapper mapper) {
+    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper) {
         this.helloService = helloService;
-        this.mapper = mapper;
+        this.privilegeMapper = privilegeMapper;
+        this.businessRoleMapper = businessRoleMapper;
     }
 
-//    @GET
-//    public Response greetings() {
-//        helloService.createNode();
-//        return Response.ok().build();
-//    }
+    @GET
+    @Path("/privileges")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPrivileges() {
+        return Response.ok().entity(privilegeMapper.selectAll()).build();
+    }
 
     @GET
+    @Path("/businessRoles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response greetings() {
-        return Response.ok().entity(mapper.selectAll()).build();
+    public Response getBusinessRoles() {
+        return Response.ok().entity(businessRoleMapper.selectAll()).build();
     }
 
 }
