@@ -1,4 +1,4 @@
-package lu.cerberians.sollist.forms;
+package lu.cerberians.sollist.user;
 
 public class UserForm {
 

@@ -1,6 +1,6 @@
 package lu.cerberians.sollist.entities;
 
-import lu.cerberians.sollist.forms.UserForm;
+import lu.cerberians.sollist.user.UserForm;
 
 public class User {
 

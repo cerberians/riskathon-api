@@ -1,7 +1,6 @@
-package lu.cerberians.sollist.services;
+package lu.cerberians.sollist.user;
 
 import lu.cerberians.sollist.entities.User;
-import lu.cerberians.sollist.forms.UserForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
