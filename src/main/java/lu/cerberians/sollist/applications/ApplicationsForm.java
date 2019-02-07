@@ -1,29 +1,29 @@
-package lu.cerberians.sollist.forms;
+package lu.cerberians.sollist.applications;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ApplicationListForm {
+public class ApplicationsForm {
 
-    private List<ApplicationsForm> applications;
+    private List<Applications> applications;
 
-    public ApplicationListForm() {
+    public ApplicationsForm() {
         this.applications = Arrays.asList(
-new ApplicationsForm(1,1,1,"Dovetail", "database", "data server", "Asset owner 1","","",false, false),
-new ApplicationsForm(2,1,1,"Dovetail", "server1", "application server 1", "Asset owner 2","","",true,true),
-new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset owner 3","","BR3",true, true)
+            new Applications(1,1,1,"Dovetail", "database", "data server", "Asset owner 1","",true, true),
+new Applications(2,1,1,"Dovetail", "server1", "application server 1", "Asset owner 2","",false,false),
+new Applications(3,1,1,"Dovetail", "server2", "application server 2", "Asset owner 3","BR3",false, false)
 );
-    }
+}
 
-    public List<ApplicationsForm> getApplications() {
+    public List<Applications> getApplications() {
         return applications;
     }
 
-    public void setApplications(List<ApplicationsForm> applications) {
+    public void setApplications(List<Applications> applications) {
         this.applications = applications;
     }
 
-    public class ApplicationsForm {
+    public class Applications {
 
         private int sollId;
         private int appId;
@@ -32,12 +32,11 @@ new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset
         private String assetName;
         private String assetType;
         private String assetOwner;
-        private String itCustodian;
         private String businessRole;
         private boolean soll;
         private boolean sollist;
 
-        public ApplicationsForm(int sollId,int appId,int assetId,String application, String assetName, String assetType, String assetOwner, String itCustodian, String businessRole, boolean soll, boolean sollist) {
+        public Applications(int sollId, int appId, int assetId, String application, String assetName, String assetType, String assetOwner, String businessRole, boolean soll, boolean sollist) {
             this.sollId = sollId;
             this.appId = appId;
             this.assetId = assetId;
@@ -46,7 +45,6 @@ new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset
             this.assetName = assetName;
             this.assetType = assetType;
             this.assetOwner = assetOwner;
-            this.itCustodian = itCustodian;
             this.businessRole = businessRole;
             this.soll = soll;
             this.sollist = sollist;
@@ -82,14 +80,6 @@ new ApplicationsForm(3,1,1,"Dovetail", "server2", "application server 2", "Asset
 
         public void setAssetOwner(String assetOwner) {
             this.assetOwner = assetOwner;
-        }
-
-        public String getItCustodian() {
-            return itCustodian;
-        }
-
-        public void setItCustodian(String itCustodian) {
-            this.itCustodian = itCustodian;
         }
 
         public String getBusinessRole() {

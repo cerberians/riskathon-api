@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Asset Functions</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Create an asset function</h1>
+
+    <div>
+        <form class="form-horizontal"
+              th:object="${form}"
+              th:action="@{/asset-functions/create}"
+              method="post">
+
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" id="name" th:field="*{name}">
+            </div>
+
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
