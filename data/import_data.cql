@@ -48,3 +48,6 @@ MATCH (asset:Asset),(type:AssetType)
   WHERE asset.id = row.id AND type.id = row.idType
 CREATE (asset)-[relation:HAS_TYPE]->(type)
 RETURN type(relation);
+
+MERGE (n:Blacklist {name: "Blacklist"}) RETURN n
+MERGE (n:Whitelist {name: "Blacklist"}) RETURN n
