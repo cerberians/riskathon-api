@@ -61,6 +61,9 @@ public class HelloResource {
     @Path("/constraintTest")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApplications() {
+        final Asset asset = new Asset();
+        asset.setId("1");
+
         Privilege p1 = new Privilege();
         p1.setId("p1");
         p1.setName("p1");
@@ -71,13 +74,13 @@ public class HelloResource {
         e1.setId("e1");
         e1.setName("e1");
         e1.setPrivilege(p1);
-        entitlementMapper.create(e1);
+        entitlementMapper.create(asset, e1);
 
 
         AssetFunction af1 = new AssetFunction();
         af1.setId("af1");
         af1.setName("af1");
-        assetFunctionMapper.create(af1);
+        assetFunctionMapper.create(asset, af1);
 
         constraintsService.create(af1.getId(), e1.getId(), true);
         return Response.ok().build();

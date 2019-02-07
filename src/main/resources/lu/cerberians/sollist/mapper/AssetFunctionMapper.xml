@@ -5,14 +5,17 @@
 <mapper namespace="lu.cerberians.sollist.mapper.AssetFunctionMapper">
 
     <insert id="create">
-        call apoc.create.node(['AssetFunction', 'Entity'], {
-            id: #{entity.id},
-            name: #{entity.name}
+        CREATE (af:AssetFunction:Entity {
+            id: #{assetFunction.id},
+            name: #{assetFunction.name}
         })
+        WITH af
+        MATCH (asset:Asset { id: #{asset.id} })
+        CREATE (asset)-[:HAS_ASSET_FUNCTION]->(af)
     </insert>
 
     <select id="getAll" resultMap="assetFunctionResultMap">
-        MATCH (a:AssetFunction)
+        MATCH (asset:Asset { id: #{asset.id} })-[:HAS_ASSET_FUNCTION]->(a:AssetFunction)
         RETURN
             a.id as id,
             a.name as name

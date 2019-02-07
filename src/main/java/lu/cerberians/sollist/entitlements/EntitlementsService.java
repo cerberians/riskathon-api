@@ -1,5 +1,6 @@
 package lu.cerberians.sollist.entitlements;
 
+import lu.cerberians.sollist.entities.Asset;
 import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.mapper.EntitlementMapper;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,15 @@ public class EntitlementsService {
         this.entitlementMapper = entitlementMapper;
     }
 
-    public Entitlement create(Entitlement entitlement) {
+    public Entitlement create(Asset asset,
+                              Entitlement entitlement) {
         entitlement.setId(UUID.randomUUID().toString());
-        entitlementMapper.create(entitlement);
+        entitlementMapper.create(asset, entitlement);
         return entitlement;
     }
 
-    public List<Entitlement> getAll() {
-        return entitlementMapper.getAll();
+    public List<Entitlement> getAll(Asset asset) {
+        return entitlementMapper.getAll(asset);
     }
 
 }

@@ -5,18 +5,21 @@
 <mapper namespace="lu.cerberians.sollist.mapper.EntitlementMapper">
 
     <insert id="create">
-        call apoc.create.node(['Entitlement', 'Entity'], {
+        CREATE (e:Entitlement:Entity {
             id: #{entitlement.id},
             name: #{entitlement.name}
         })
-        YIELD node AS e
         WITH e
         MATCH (p:Privilege { id: #{entitlement.privilege.id} })
         CREATE (e)-[:HAS_PRIVILEGE]->(p)
+        WITH e
+        MATCH (a:Asset { id: #{asset.id} })
+        CREATE (a)-[:HAS_ENTITLEMENT]->(e)
     </insert>
 
     <select id="getAll" resultMap="entitlementResultMap">
-        MATCH (e:Entitlement)-[:HAS_PRIVILEGE]->(p:Privilege)
+        MATCH (a:Asset { id: #{asset.id} })-[:HAS_ENTITLEMENT]->
+            (e:Entitlement)-[:HAS_PRIVILEGE]->(p:Privilege)
         RETURN
             e.id as id,
             e.name as name,
