@@ -63,13 +63,17 @@ function main() {
 
     echo "Neo4j is ready!"
 
-    should_load_data ${NEO4J_USERNAME} ${NEO4J_PASSWORD}
-    if [[ ${?} == 0 ]]; then
-        echo "Loading data..."
-        load_data
-    else
-        echo "Data already loaded"
-    fi
+#    Loads data every time
+    load_data
+
+#   Loads data conditionally: only if DB is empty
+#    should_load_data ${NEO4J_USERNAME} ${NEO4J_PASSWORD}
+#    if [[ ${?} == 0 ]]; then
+#        echo "Loading data..."
+#        load_data
+#    else
+#        echo "Data already loaded"
+#    fi
 
     echo "Loading indexes"
     load_indexes
