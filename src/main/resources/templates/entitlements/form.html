@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Entitlements</title>
+</head>
+<body>
+<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+<div layout:fragment="content">
+    <!-- Content here -->
+    <h1>Create an entitlement</h1>
+
+    <div>
+        <form class="form-horizontal"
+              th:object="${form}"
+              th:action="@{/entitlements/create}"
+              method="post">
+
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" id="name" th:field="*{name}">
+            </div>
+
+            <div>
+                <label for="privilege">Privilege type: </label>
+                <select id="privilege" th:field="*{privilege.id}">
+                    <option th:each="privilege : ${privileges}" th:value="${privilege.id}" th:text="${privilege.name}"></option>
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

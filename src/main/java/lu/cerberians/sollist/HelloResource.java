@@ -1,5 +1,6 @@
 package lu.cerberians.sollist;
 
+import lu.cerberians.sollist.mapper.ApplicationMapper;
 import lu.cerberians.sollist.mapper.BusinessRoleMapper;
 import lu.cerberians.sollist.mapper.PrivilegeMapper;
 
@@ -19,11 +20,14 @@ public class HelloResource {
 
     private BusinessRoleMapper businessRoleMapper;
 
+    private ApplicationMapper applicationMapper;
+
     @Inject
-    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper) {
+    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper, ApplicationMapper applicationMapper) {
         this.helloService = helloService;
         this.privilegeMapper = privilegeMapper;
         this.businessRoleMapper = businessRoleMapper;
+        this.applicationMapper = applicationMapper;
     }
 
     @GET
@@ -38,6 +42,13 @@ public class HelloResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBusinessRoles() {
         return Response.ok().entity(businessRoleMapper.selectAll()).build();
+    }
+
+    @GET
+    @Path("/applications")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getApplications() {
+        return Response.ok().entity(applicationMapper.selectAll()).build();
     }
 
 }

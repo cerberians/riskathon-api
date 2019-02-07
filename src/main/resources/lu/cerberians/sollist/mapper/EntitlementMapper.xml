@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lu.cerberians.sollist.mapper.EntitlementMapper">
+
+    <insert id="create">
+        CREATE (e:Entitlement {
+            id: #{entitlement.id},
+            name: #{entitlement.name}
+        })
+        WITH e
+        MATCH (p:Privilege { id: #{entitlement.privilege.id} })
+        CREATE (e)-[:HAS_PRIVILEGE]->(p)
+    </insert>
+
+    <select id="getAll" resultMap="entitlementResultMap">
+        MATCH (e:Entitlement)-[:HAS_PRIVILEGE]->(p:Privilege)
+        RETURN
+            e.id as id,
+            e.name as name,
+            p.id as privilegeId,
+            p.name as privilegeName
+    </select>
+
+    <resultMap id="entitlementResultMap" type="lu.cerberians.sollist.entities.Entitlement">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="privilege" javaType="lu.cerberians.sollist.entities.Privilege">
+            <result property="id" column="privilegeId"/>
+            <result property="name" column="privilegeName"/>
+        </association>
+    </resultMap>
+
+</mapper>

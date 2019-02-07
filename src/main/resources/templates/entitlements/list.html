@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Entitlements</title>
+</head>
+<body>
+<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+<div layout:fragment="content">
+    <!-- Content here -->
+    <h1>Entitlements</h1>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="tableh">
+                <td>ID</td>
+                <td>Name</td>
+                <td>Privilege</td>
+            </tr>
+            </thead>
+            <tr th:each="entitlement : ${entitlements}">
+                <td th:text="${entitlement.id}"></td>
+                <td th:text="${entitlement.name}"></td>
+                <td th:text="${entitlement.privilege.name}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <a href="/entitlements/create">Create an entitlement</a>
+    </div>
+</div>
+</body>
+</html>
