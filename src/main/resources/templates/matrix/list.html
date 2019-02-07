@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Asset Functions - Business Roles</title>
+</head>
+<body>
+<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+<div layout:fragment="content">
+    <!-- Content here -->
+    <h1>Asset Functions - Business Roles</h1>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="tableh">
+                <td>Asset Functions</td>
+                <td>Business Role</td>
+            </tr>
+            </thead>
+            <tr th:each="constraint : ${constraintList}">
+                <td th:text="${constraint.fromEntity.name}"></td>
+                <td th:text="${constraint.toEntity.name}"></td>
+                <td >
+                    <input type="checkbox" name="active" th:checked="${constraint.allowed}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

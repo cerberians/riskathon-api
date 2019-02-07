@@ -31,7 +31,9 @@ public class AssetFunctionService {
     }
 
     public List<AssetFunction> getAll() {
-        final Asset asset = applicationContext.getAsset();
+       // final Asset asset = applicationContext.getAsset();
+        final Asset asset = new Asset();
+        asset.setId("16");
         return assetFunctionMapper.getAll(asset);
     }
 
