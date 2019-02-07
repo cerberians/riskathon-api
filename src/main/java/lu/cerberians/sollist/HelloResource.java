@@ -1,15 +1,16 @@
 package lu.cerberians.sollist;
 
+import lu.cerberians.sollist.constraints.ConstraintsService;
 import lu.cerberians.sollist.entities.*;
 import lu.cerberians.sollist.mapper.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("/hello")
 public class HelloResource {
@@ -26,15 +27,20 @@ public class HelloResource {
 
     private EntitlementMapper entitlementMapper;
 
+    private ConstraintsService constraintsService;
+
+
+
     @Inject
     public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper,
-                         ConstraintMapper constraintMapper, AssetFunctionMapper assetFunctionMapper, EntitlementMapper entitlementMapper) {
+                         ConstraintMapper constraintMapper, AssetFunctionMapper assetFunctionMapper, EntitlementMapper entitlementMapper, ConstraintsService constraintsService) {
         this.helloService = helloService;
         this.privilegeMapper = privilegeMapper;
         this.businessRoleMapper = businessRoleMapper;
         this.constraintMapper = constraintMapper;
         this.assetFunctionMapper = assetFunctionMapper;
         this.entitlementMapper = entitlementMapper;
+        this.constraintsService = constraintsService;
     }
 
     @GET
@@ -76,7 +82,7 @@ public class HelloResource {
         af1.setName("af1");
         assetFunctionMapper.create(asset, af1);
 
-        constraintMapper.create(new Constraint().setA(af1).setB(e1));
+        constraintsService.create(af1.getId(), e1.getId(), true);
         return Response.ok().build();
     }
 
