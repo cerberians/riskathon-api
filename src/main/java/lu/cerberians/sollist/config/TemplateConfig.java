@@ -9,10 +9,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 public class TemplateConfig {
 
     @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.addDialect(new LayoutDialect());
-        return templateEngine;
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
     }
 
 }
