@@ -2,7 +2,6 @@ package lu.cerberians.sollist.mapper;
 
 import lu.cerberians.sollist.entities.Asset;
 import lu.cerberians.sollist.entities.AssetFunction;
-import lu.cerberians.sollist.entities.Entitlement;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
