@@ -9,11 +9,11 @@ public class Constraint {
 
     private String id;
 
-    private Boolean isWhitelist;
+    private Boolean whitelist;
 
     // FROM
-    private String aId;
+    private String from;
 
     // TO
-    private String bId;
+    private String to;
 }

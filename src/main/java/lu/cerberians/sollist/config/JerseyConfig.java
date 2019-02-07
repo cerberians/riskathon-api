@@ -13,6 +13,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import lu.cerberians.sollist.HelloResource;
+import lu.cerberians.sollist.matrix.MatrixResource;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -31,6 +32,7 @@ public class JerseyConfig extends ResourceConfig {
         super();
 
         register(HelloResource.class);
+        register(MatrixResource.class);
 
         EncodingFilter.enableFor(this, GZipEncoder.class);
         register(RolesAllowedDynamicFeature.class);
