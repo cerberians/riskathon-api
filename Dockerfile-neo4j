@@ -2,7 +2,7 @@ FROM neo4j:3.4.0
 MAINTAINER florian.sey@gmail.com
 
 COPY files/*.jar /var/lib/neo4j/plugins/
-# COPY data/*.csv /var/lib/neo4j/import/
+COPY data/*.csv /var/lib/neo4j/import/
 
 # https://neo4j-contrib.github.io/neo4j-apoc-procedures/
 # Procedures that use internal APIs have to be allowed
