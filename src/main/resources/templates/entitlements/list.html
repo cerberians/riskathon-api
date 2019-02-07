@@ -6,30 +6,35 @@
     <title>Entitlements</title>
 </head>
 <body>
-<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
-    <!-- Content here -->
-    <h1>Entitlements</h1>
-
-    <div>
-        <table class="table table-hover">
-            <thead>
-            <tr class="tableh">
-                <td>ID</td>
-                <td>Name</td>
-                <td>Privilege</td>
-            </tr>
-            </thead>
-            <tr th:each="entitlement : ${entitlements}">
-                <td th:text="${entitlement.id}"></td>
-                <td th:text="${entitlement.name}"></td>
-                <td th:text="${entitlement.privilege.name}"></td>
-            </tr>
-        </table>
+    <div class="row">
+        <div class="col col-6">
+            <h1>Entitlements</h1>
+        </div>
+        <div class="col col-6">
+            <a class="btn btn-primary float-right" href="/entitlements/create">
+                Create an entitlement
+            </a>
+        </div>
     </div>
 
-    <div>
-        <a href="/entitlements/create">Create an entitlement</a>
+    <div class="row">
+        <table class="table table-hover table-striped">
+            <thead class="indigo darken-4 white-text bold">
+                <tr class="tableh">
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Privilege</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entitlement : ${entitlements}">
+                    <td th:text="${entitlement.id}"></td>
+                    <td th:text="${entitlement.name}"></td>
+                    <td th:text="${entitlement.privilege.name}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
