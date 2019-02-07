@@ -1,5 +1,6 @@
 package lu.cerberians.sollist;
 
+import lu.cerberians.sollist.mapper.HelloMapper;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
