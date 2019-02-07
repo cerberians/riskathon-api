@@ -45,7 +45,7 @@ public class HelloResource {
     }
 
     @GET
-    @Path("/applications")
+    @Path("/apps")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApplications() {
         return Response.ok().entity(applicationMapper.selectAll()).build();
