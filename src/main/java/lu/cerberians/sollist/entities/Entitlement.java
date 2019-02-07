@@ -9,5 +9,4 @@ import lombok.ToString;
 @ToString
 public class Entitlement extends Entity {
     private Privilege privilege;
-
 }

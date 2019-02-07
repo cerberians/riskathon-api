@@ -1,11 +1,11 @@
 package lu.cerberians.sollist;
 
-import lu.cerberians.sollist.mapper.ApplicationMapper;
-import lu.cerberians.sollist.mapper.BusinessRoleMapper;
-import lu.cerberians.sollist.mapper.PrivilegeMapper;
+import lu.cerberians.sollist.entities.*;
+import lu.cerberians.sollist.mapper.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -20,14 +20,21 @@ public class HelloResource {
 
     private BusinessRoleMapper businessRoleMapper;
 
-    private ApplicationMapper applicationMapper;
+    private ConstraintMapper constraintMapper;
+
+    private AssetFunctionMapper assetFunctionMapper;
+
+    private EntitlementMapper entitlementMapper;
 
     @Inject
-    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper, ApplicationMapper applicationMapper) {
+    public HelloResource(HelloService helloService, PrivilegeMapper privilegeMapper, BusinessRoleMapper businessRoleMapper,
+                         ConstraintMapper constraintMapper, AssetFunctionMapper assetFunctionMapper, EntitlementMapper entitlementMapper) {
         this.helloService = helloService;
         this.privilegeMapper = privilegeMapper;
         this.businessRoleMapper = businessRoleMapper;
-        this.applicationMapper = applicationMapper;
+        this.constraintMapper = constraintMapper;
+        this.assetFunctionMapper = assetFunctionMapper;
+        this.entitlementMapper = entitlementMapper;
     }
 
     @GET
@@ -45,10 +52,29 @@ public class HelloResource {
     }
 
     @GET
-    @Path("/applications")
+    @Path("/constraintTest")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getApplications() {
-        return Response.ok().entity(applicationMapper.selectAll()).build();
+        Privilege p1 = new Privilege();
+        p1.setId("p1");
+        p1.setName("p1");
+        privilegeMapper.create(p1);
+
+
+        Entitlement e1 = new Entitlement();
+        e1.setId("e1");
+        e1.setName("e1");
+        e1.setPrivilege(p1);
+        entitlementMapper.create(e1);
+
+
+        AssetFunction af1 = new AssetFunction();
+        af1.setId("af1");
+        af1.setName("af1");
+        assetFunctionMapper.create(af1);
+
+        constraintMapper.create(new Constraint().setA(af1).setB(e1));
+        return Response.ok().build();
     }
 
 }

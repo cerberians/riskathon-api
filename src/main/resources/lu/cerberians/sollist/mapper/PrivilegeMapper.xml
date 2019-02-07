@@ -8,4 +8,8 @@
         MATCH (n:Privilege) RETURN n.id as id, n.name as name
     </select>
 
+    <insert id="create">
+        CREATE (n:Privilege {id: #{privilege.id}, name: #{privilege.name}})
+    </insert>
+
 </mapper>

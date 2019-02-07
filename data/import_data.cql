@@ -39,15 +39,13 @@ LOAD CSV WITH HEADERS FROM 'file:///asset.csv'
 AS row WITH row
 MATCH (app:Application),(as:Asset)
   WHERE app.id = row.idApp AND as.id = row.id
-CREATE (app)-[rel:HAS_ASSET]->(as)
-RETURN type(rel);
+CREATE (app)-[rel:HAS_ASSET]->(as);
 
 LOAD CSV WITH HEADERS FROM 'file:///asset.csv'
 AS row WITH row
 MATCH (asset:Asset),(type:AssetType)
   WHERE asset.id = row.id AND type.id = row.idType
-CREATE (asset)-[relation:HAS_TYPE]->(type)
-RETURN type(relation);
+CREATE (asset)-[relation:HAS_TYPE]->(type);
 
-MERGE (n:Blacklist {name: "Blacklist"}) RETURN n
-MERGE (n:Whitelist {name: "Blacklist"}) RETURN n
+CREATE (n:Blacklist {id: "Blacklist", name: "Blacklist"}) RETURN n;
+CREATE (n:Whitelist {id: "Whitelist", name: "Whitelist"}) RETURN n;

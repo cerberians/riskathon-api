@@ -1,11 +1,9 @@
 package lu.cerberians.sollist.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class AssetFunction {
-
-    private String id;
-    private String name;
-
+public class AssetFunction extends Entity {
 }
