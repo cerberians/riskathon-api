@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
 
     public void deleteAll(){
         //userRepository.deleteAll();
-        log.debug(" Neo4j reinitialized");
+        log.debug("Neo4j reinitialized");
     }
 
     @Override
