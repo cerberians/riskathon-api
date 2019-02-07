@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 @Path("/hello")
 public class HelloResource {
@@ -73,7 +74,7 @@ public class HelloResource {
         af1.setName("af1");
         assetFunctionMapper.create(af1);
 
-        constraintMapper.create(new Constraint().setA(af1).setB(e1));
+        constraintMapper.create(new Constraint().setA(af1).setB(e1).setIsWhitelist(true).setId(UUID.randomUUID().toString()));
         return Response.ok().build();
     }
 

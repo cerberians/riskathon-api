@@ -7,7 +7,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Constraint {
 
-    private ConstraintType type;
+    private String id;
+
+    private Boolean isWhitelist;
 
     // FROM
     private Entity a;
