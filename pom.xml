@@ -199,6 +199,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.neo4j.procedure</groupId>
             <artifactId>apoc</artifactId>
             <version>3.4.0.1</version>
