@@ -1,5 +1,6 @@
 package lu.cerberians.sollist.mapper;
 
+import lu.cerberians.sollist.entities.Asset;
 import lu.cerberians.sollist.entities.AssetFunction;
 import lu.cerberians.sollist.entities.Entitlement;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +11,9 @@ import java.util.List;
 @Mapper
 public interface AssetFunctionMapper {
 
-    void create(@Param("entity") AssetFunction assetFunction);
+    void create(@Param("asset") Asset asset,
+                @Param("assetFunction") AssetFunction assetFunction);
 
-    List<AssetFunction> getAll();
+    List<AssetFunction> getAll(@Param("asset") Asset asset);
+
 }

@@ -1,6 +1,8 @@
 package lu.cerberians.sollist.entitlements;
 
 import lombok.extern.slf4j.Slf4j;
+import lu.cerberians.sollist.ApplicationContext;
+import lu.cerberians.sollist.entities.Asset;
 import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.mapper.PrivilegeMapper;
 import org.springframework.stereotype.Controller;
@@ -18,17 +20,21 @@ public class EntitlementsController {
 
     private PrivilegeMapper privilegeMapper;
     private EntitlementsService entitlementsService;
+    private ApplicationContext applicationContext;
 
     @Inject
     public EntitlementsController(PrivilegeMapper privilegeMapper,
-                                  EntitlementsService entitlementsService) {
+                                  EntitlementsService entitlementsService,
+                                  ApplicationContext applicationContext) {
         this.privilegeMapper = privilegeMapper;
         this.entitlementsService = entitlementsService;
+        this.applicationContext = applicationContext;
     }
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("entitlements", entitlementsService.getAll());
+        final Asset asset = applicationContext.getAsset();
+        model.addAttribute("entitlements", entitlementsService.getAll(asset));
         return "entitlements/list";
     }
 
@@ -42,7 +48,8 @@ public class EntitlementsController {
     @PostMapping("create")
     public String create(Entitlement entitlement) {
         log.info("{}", entitlement);
-        entitlementsService.create(entitlement);
+        final Asset asset = applicationContext.getAsset();
+        entitlementsService.create(asset, entitlement);
         return "redirect:/entitlements";
     }
 
