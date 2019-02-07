@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lu.cerberians.sollist.mapper.ConstraintMapper">
+
+    <insert id="createConstraint">
+        MATCH (n:BusinessRole) RETURN n.id as id, n.name as name
+
+        MATCH (a:Entity),(b:Entity)
+        WHERE a.id = value.a.id AND b.name = 'B'
+        CREATE (a)-[r:RELTYPE]->(b)
+    </insert>
+
+</mapper>

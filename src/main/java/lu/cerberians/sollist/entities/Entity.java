@@ -1,4 +1,9 @@
 package lu.cerberians.sollist.entities;
 
-public interface Entity {
+import lombok.Data;
+
+@Data
+public abstract class Entity {
+    private String id;
+    private String name;
 }
