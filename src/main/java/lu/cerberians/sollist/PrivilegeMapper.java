@@ -1,0 +1,11 @@
+package lu.cerberians.sollist;
+
+import lu.cerberians.sollist.entities.Privilege;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface PrivilegeMapper {
+    List<Privilege> selectAll();
+}
