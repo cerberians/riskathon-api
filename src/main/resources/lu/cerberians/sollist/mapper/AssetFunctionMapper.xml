@@ -5,9 +5,9 @@
 <mapper namespace="lu.cerberians.sollist.mapper.AssetFunctionMapper">
 
     <insert id="create">
-        CREATE (a:AssetFunction {
-            id: #{assetFunction.id},
-            name: #{assetFunction.name}
+        call apoc.create.node(['AssetFunction', 'Entity'], {
+            id: #{entity.id},
+            name: #{entity.name}
         })
     </insert>
 
