@@ -5,11 +5,10 @@
 <mapper namespace="lu.cerberians.sollist.mapper.EntitlementMapper">
 
     <insert id="create">
-        call apoc.create.node(['Entitlement', 'Entity'], {
+        CREATE (e:Entitlement:Entity {
             id: #{entitlement.id},
             name: #{entitlement.name}
         })
-        YIELD node AS e
         WITH e
         MATCH (p:Privilege { id: #{entitlement.privilege.id} })
         CREATE (e)-[:HAS_PRIVILEGE]->(p)
