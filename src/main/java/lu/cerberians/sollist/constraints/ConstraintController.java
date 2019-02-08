@@ -62,9 +62,10 @@ public class ConstraintController {
 
                 }
             }
+            model.addAttribute("activeBA", Boolean.TRUE);
             model.addAttribute("title", "Business Roles - Asset Functions");
 
-        } else if("EA".equals(combinationId)) {
+        } else if("AE".equals(combinationId)) {
             List<AssetFunction> assetFunctions = assetFunctionService.getAll();
 
             List<Entitlement> entitlements =  entitlementsService.getAll(applicationContext.getAsset());
@@ -82,6 +83,7 @@ public class ConstraintController {
 
                 }
             }
+            model.addAttribute("activeAE", Boolean.TRUE);
             model.addAttribute("title", "Asset Functions - Entitlments");
 
         }
@@ -102,6 +104,7 @@ public class ConstraintController {
 
                 }
             }
+            model.addAttribute("activeEE", Boolean.TRUE);
             model.addAttribute("title", "Entitlments - Toxic");
 
         }else if("AA".equals(combinationId)) {
@@ -121,6 +124,7 @@ public class ConstraintController {
 
                 }
             }
+            model.addAttribute("activeAA", Boolean.TRUE);
             model.addAttribute("title", "Asset Functions - Toxic");
         }
 
