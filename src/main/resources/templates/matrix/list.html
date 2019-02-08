@@ -12,24 +12,29 @@
     <h1>Asset Functions - Business Roles</h1>
 
     <div>
-        <form  th:action="@{/matrix/save}" th:object="${constraintForm}" method="post">
+        <form action="#" th:object="${constraintForm}" th:action="@{/matrix}" method="post">
+
             <table>
                 <thead>
                 <tr>
-                    <th> Asset Function</th>
-                    <th> Business Role</th>
+                    <th>Asset Function</th>
+                    <th>Business Role</th>
                 </tr>
                 </thead>
+
                 <tbody>
-                <tr th:each="constraint, itemStat : *{constraints}">
-                    <td><input th:field="*{constraints[__${itemStat.index}__].fromEntity.name}" /></td>
-                    <td><input th:field="*{constraints[__${itemStat.index}__].toEntity.name}" /></td>
+                <tr th:each="c, rowStat : *{constraints}"	th:class="${rowStat.even ? 'even' : 'odd'}">
+                    <td  th:text="*{constraints[__${rowStat.index}__].fromEntity.name}" ></td>
+                    <td th:text="*{constraints[__${rowStat.index}__].toEntity.name}" ></td>
+                    <td >
+                        <input type="checkbox" name="active" th:checked="*{constraints[__${rowStat.index}__].whitelist}" />
+                    </td>
                 </tr>
                 </tbody>
+
+                <tfoot></tfoot>
             </table>
-            <div class="col-sm-10">
-                <button type="submit" name="submit" class="link-button">Submit</button>
-            </div>
+            <input type="submit" value="Save" />
         </form>
 
     </div>

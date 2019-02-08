@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -42,7 +39,8 @@ public class ConstraintController {
 
         for(AssetFunction assetFunction : map.keySet()) {
             for (BusinessRole businessRole : map.get(assetFunction)){
-                constraintList .add(Constraint.builder().fromEntity(assetFunction)
+                constraintList .add(Constraint.builder().id(UUID.randomUUID().toString())
+                                        .fromEntity(assetFunction)
                                         .toEntity(businessRole)
                                         .whitelist(false)
                                         .build());
@@ -52,7 +50,7 @@ public class ConstraintController {
         model.addAttribute("constraints", constraintList);
         ConstraintForm constraintForm = new ConstraintForm();
         constraintForm.getConstraints().addAll(constraintList);
-        model.addAttribute("constraintForm", constraintList);
+        model.addAttribute("constraintForm", constraintForm);
         return "matrix/list";
     }
 
