@@ -6,7 +6,14 @@
     <title>Asset Functions - Business Roles</title>
     <script>
         function updateFConstraints(){
-            console.log(document.getElementById("matrix"));
+            var matrix = document.getElementById("matrix").getElementsByTagName("tr");
+            var fcons = "";
+            for (var i = 0; i < matrix.length; i++) {
+              fcons = fcons + matrix[i].getElementsByClassName("fromEntityId")[0].value + ","
+              + matrix[i].getElementsByClassName("toEntityId")[0].value + ","
+              + matrix[i].getElementsByClassName("whitelist")[0].value + ";";
+            }
+            document.getElementById("fconstraints").value = fcons;
         }
     </script>
 </head>
@@ -18,7 +25,7 @@
 
     <div>
         <form  th:action="@{/matrix/save}" th:object="${constraintForm}" method="post">
-            <input type="hidden" th:name="fconstraints" th:value="${constraints}"/>
+            <input type="hidden" id="fconstraints" th:name="fconstraints" th:value="${constraints}"/>
             <table>
                 <thead>
                 <tr>
@@ -30,10 +37,10 @@
                 <tr th:each="c: ${constraints}">
                     <td><input th:value="${c.fromEntity.name}"/></td>
                     <td><input th:value="${c.toEntity.name}"/></td>
-                    <input type="hidden" th:value="${c.fromEntity.id}"/>
-                    <input type="hidden" th:value="${c.toEntity.id}"/>
+                    <input class="fromEntityId" type="hidden" th:value="${c.fromEntity.id}"/>
+                    <input class="toEntityId" type="hidden" th:value="${c.toEntity.id}"/>
                     <td>
-                        <input type="checkbox" th:value="${c.whitelist}"/>
+                        <input class="whitelist" type="checkbox" th:value="${c.whitelist}"/>
                     </td>
                 </tr>
                 </tbody>
