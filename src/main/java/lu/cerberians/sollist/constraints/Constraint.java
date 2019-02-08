@@ -15,5 +15,4 @@ public class Constraint {
     private Boolean whitelist;
     private Entity fromEntity;
     private Entity toEntity;
-
 }

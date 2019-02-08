@@ -4,6 +4,18 @@
       layout:decorate="~{layouts/layout}">
 <head>
     <link rel="stylesheet" href="/css/sollcreation.css">
+    <script>
+        function updateFConstraints(){
+            var matrix = document.getElementById("matrix").getElementsByTagName("tr");
+            var fcons = "";
+            for (var i = 0; i < matrix.length; i++) {
+              fcons = fcons + matrix[i].getElementsByClassName("fromEntityId")[0].value + ","
+              + matrix[i].getElementsByClassName("toEntityId")[0].value + ","
+              + matrix[i].getElementsByClassName("whitelist")[0].value + ";";
+            }
+            document.getElementById("fconstraints").value = fcons;
+        }
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -28,6 +40,35 @@
             <a class="nav-link" href="#">Asset Functions - Entitlements</a>
         </li>
     </ul>
+    </div>
+    <div>
+        <form  th:action="@{/matrix/save}" th:object="${form}" method="post">
+            <input type="hidden" id="fconstraints" th:name="fconstraints"/>
+            <table>
+                <thead>
+                <tr>
+                    <th>Entitlements (from)</th>
+                    <th>Entitlements (to)</th>
+                    <th>Toxic</th>
+                </tr>
+                </thead>
+                <tbody id="matrix">
+                <tr th:each="c: ${constraints}">
+                    <td><input th:value="${c.fromEntity.name}"/></td>
+                    <td><input th:value="${c.toEntity.name}"/></td>
+                    <input class="fromEntityId" type="hidden" th:value="${c.fromEntity.id}"/>
+                    <input class="toEntityId" type="hidden" th:value="${c.toEntity.id}"/>
+                    <td>
+                        <input class="whitelist" type="checkbox" th:value="${c.whitelist}"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-10">
+                <button type="submit" name="submit" onclick="updateFConstraints()" class="link-button">Submit</button>
+            </div>
+        </form>
+
     </div>
 </div>
 </body>
