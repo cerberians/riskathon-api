@@ -1,4 +1,9 @@
 brId,afId,
+"application administrator","systemmanagementpoweruser"
+"application support","paymentsconsultation"
+"application support","systemmanagement"
+"client administration officer","paymentsconsultation"
+"credit transfer officer","sctstandarduser"
 "credit transfer supervisor","sctpoweruser"
 "iam officer","uservalidation"
 "iam ressource administrator","usermanagement"
