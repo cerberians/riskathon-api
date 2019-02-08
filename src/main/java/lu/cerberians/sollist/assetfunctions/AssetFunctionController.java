@@ -39,7 +39,7 @@ public class AssetFunctionController {
     public String create(AssetFunction assetFunction) {
         log.info("{}", assetFunction);
         assetFunctionService.create(assetFunction);
-        return "redirect:/asset-functions";
+        return "sollcreation/assetfunctions";
     }
 
 }

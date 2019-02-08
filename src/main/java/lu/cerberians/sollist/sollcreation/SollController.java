@@ -3,6 +3,7 @@ package lu.cerberians.sollist.sollcreation;
 import lu.cerberians.sollist.ApplicationContext;
 import lu.cerberians.sollist.applications.ApplicationsController;
 import lu.cerberians.sollist.applications.ApplicationsConverter;
+import lu.cerberians.sollist.entities.AssetFunction;
 import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.mapper.ApplicationMapper;
 import lu.cerberians.sollist.mapper.AssetMapper;
@@ -29,9 +30,9 @@ public class SollController {
     }
 
     @RequestMapping(value = "/af")
-    public String createAssetFunctions(){
+    public String createAssetFunctions(Model model){
         log.debug("CREATE SOLL FOR AF");
-        log.debug(applicationContext.getAsset().getName());
+        model.addAttribute("form", new AssetFunction());
         return "sollcreation/assetfunctions";
     }
 
