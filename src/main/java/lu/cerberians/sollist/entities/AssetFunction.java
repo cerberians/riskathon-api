@@ -6,4 +6,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AssetFunction extends Entity {
+    public AssetFunction() {
+    }
 }

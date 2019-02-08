@@ -7,8 +7,6 @@ import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.entities.Privilege;
 import lu.cerberians.sollist.mapper.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +16,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 @Controller
 @RequestMapping("/matrix")
@@ -43,9 +45,16 @@ public class MatrixResource {
     }
 
     @RequestMapping(value="/save", method = RequestMethod.POST )
-    public Response createMatrix(ConstraintForm constraintForm) {
-        matrixService.createMatrix(constraintForm.getConstraints());
-        return Response.ok().build();
+    public String createMatrix(ConstraintForm constraintForm) throws IOException {
+        List<String> tokens = new ArrayList<>();
+
+        StringTokenizer tokenizer = new StringTokenizer(constraintForm.getFconstraints(), ";");
+        while (tokenizer.hasMoreElements()) {
+        tokens.add(tokenizer.nextToken());
+        }
+
+        matrixService.createMatrix(tokens);
+        return "redirect:/applications";
     }
 
     @GET
