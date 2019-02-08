@@ -2,7 +2,6 @@ package lu.cerberians.sollist.assetfunctions;
 
 import lombok.extern.slf4j.Slf4j;
 import lu.cerberians.sollist.entities.AssetFunction;
-import lu.cerberians.sollist.entities.Entitlement;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +38,7 @@ public class AssetFunctionController {
     public String create(AssetFunction assetFunction) {
         log.info("{}", assetFunction);
         assetFunctionService.create(assetFunction);
-        return "sollcreation/assetfunctions";
+        return "redirect:/asset-functions";
     }
 
 }

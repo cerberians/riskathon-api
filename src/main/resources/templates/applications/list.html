@@ -30,10 +30,10 @@
                     <td th:text="${app.businessRole}"></td>
                     <td>
                         <span th:if="${app.soll}">
-                            <a th:text="${app.soll}" th:href="@{'/applications/update/soll/'+${app.sollId}}"></a>
+                            <a th:text="${app.soll}?'Update'" th:href="@{'/applications/update/soll/'+${app.sollId}}"></a>
                         </span>
                         <span th:if="${!app.soll}">
-                            <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
+                            <a th:text="${!app.soll}?'Create'" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
                         </span>
                     </td>
                     <td th:text="${app.ist}"></td>

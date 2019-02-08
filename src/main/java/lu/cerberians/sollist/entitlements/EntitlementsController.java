@@ -46,12 +46,11 @@ public class EntitlementsController {
     }
 
     @PostMapping("create")
-    public String create(Entitlement entitlement, Model model) {
+    public String create(Entitlement entitlement) {
         log.info("{}", entitlement);
         final Asset asset = applicationContext.getAsset();
         entitlementsService.create(asset, entitlement);
-        model.addAttribute("privileges", privilegeMapper.selectAll());
-        model.addAttribute("form", new Entitlement());
-        return "sollcreation/entitlements";
+        return "redirect:/entitlements";
     }
+
 }

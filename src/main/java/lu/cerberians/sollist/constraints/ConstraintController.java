@@ -62,7 +62,10 @@ public class ConstraintController {
 
                 }
             }
-        } else if("EA".equals(combinationId)) {
+            model.addAttribute("activeBA", Boolean.TRUE);
+            model.addAttribute("title", "Business Roles - Asset Functions");
+
+        } else if("AE".equals(combinationId)) {
             List<AssetFunction> assetFunctions = assetFunctionService.getAll();
 
             List<Entitlement> entitlements =  entitlementsService.getAll(applicationContext.getAsset());
@@ -80,6 +83,49 @@ public class ConstraintController {
 
                 }
             }
+            model.addAttribute("activeAE", Boolean.TRUE);
+            model.addAttribute("title", "Asset Functions - Entitlments");
+
+        }
+        else if("EE".equals(combinationId)) {
+            List<Entitlement> entitlements = entitlementsService.getAll(applicationContext.getAsset());
+
+            Map<Entitlement, List<Entitlement>> map = new HashMap<>();
+            for(Entitlement entitlement: entitlements) {
+                map.put(entitlement, entitlements);
+            }
+            for(Entitlement ent : map.keySet()) {
+                for (Entitlement entitlement : map.get(ent)){
+                    constraintList .add(Constraint.builder().id(UUID.randomUUID().toString())
+                            .fromEntity(ent)
+                            .toEntity(entitlement)
+                            .whitelist(false)
+                            .build());
+
+                }
+            }
+            model.addAttribute("activeEE", Boolean.TRUE);
+            model.addAttribute("title", "Entitlments - Toxic");
+
+        }else if("AA".equals(combinationId)) {
+            List<AssetFunction> assetFunctions = assetFunctionService.getAll();
+
+            Map<AssetFunction, List<AssetFunction>> map = new HashMap<>();
+            for(AssetFunction assetFunction: assetFunctions) {
+                map.put(assetFunction, assetFunctions);
+            }
+            for(AssetFunction assetfc : map.keySet()) {
+                for (AssetFunction assetFunction : map.get(assetfc)){
+                    constraintList .add(Constraint.builder().id(UUID.randomUUID().toString())
+                            .fromEntity(assetfc)
+                            .toEntity(assetFunction)
+                            .whitelist(false)
+                            .build());
+
+                }
+            }
+            model.addAttribute("activeAA", Boolean.TRUE);
+            model.addAttribute("title", "Asset Functions - Toxic");
         }
 
         model.addAttribute("constraints", constraintList);

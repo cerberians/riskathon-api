@@ -4,9 +4,31 @@
       layout:decorate="~{layouts/layout}">
 <head>
     <title>Asset Functions</title>
+    <link rel="stylesheet" href="/css/sollcreation.css">
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content"> <div class="matrixh">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/soll/create/en}">Entitlements</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " th:href="@{/soll/create/af}">Asset Functions</a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activeEE} ? 'nav-link active':'nav-link '" th:href="@{/constraint/EE}">Entitlements matrix</a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activeAA} ? 'nav-link active':'nav-link '" th:href="@{/constraint/AA}">Asset functions matrix</a>
+        </li>
+        <li class="nav-item">
+            <a th:class=" ${activeBA} ? 'nav-link active':'nav-link'" th:href="@{/constraint/BA}">Business roles - Asset Functions</a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activeAE} ? 'nav-link active':'nav-link'" th:href="@{/constraint/AE}">Asset Functions - Entitlements</a>
+        </li>
+    </ul>
+</div>
 
     <div class="row justify-content-center">
         <div class="col col-6">
