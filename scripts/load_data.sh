@@ -30,6 +30,14 @@ function is_neo4j_up() {
     curl -sq ${url}
 }
 
+function load_ist() {
+    bin/cypher-shell \
+        --address bolt://riskathon-neo4j:7687 \
+        --username ${NEO4J_USERNAME} \
+        --password ${NEO4J_PASSWORD} \
+        < import/${IMPORTIST}
+}
+
 function load_data() {
     bin/cypher-shell \
         --address bolt://riskathon-neo4j:7687 \
@@ -82,6 +90,8 @@ function main() {
 
     echo "Loading indexes"
     load_indexes
+
+    load_ist
 
     echo "Done"
 }

@@ -1,9 +1,11 @@
 FROM neo4j:3.4.0
 MAINTAINER florian.sey@gmail.com
 ENV IMPORTDIR /var/lib/neo4j/import/
+ENV IMPORTIST import_ist.cql
 ENV IMPORTDATA import_data.cql
 ENV IMPORTSOLL import_soll.cql
 ENV IMPORTINDEXES import_indexes.cql
+COPY data/$IMPORTIST $IMPORTDIR
 COPY data/$IMPORTDATA $IMPORTDIR
 COPY data/$IMPORTSOLL $IMPORTDIR
 COPY data/$IMPORTINDEXES $IMPORTDIR
