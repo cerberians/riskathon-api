@@ -1,6 +1,6 @@
-package lu.cerberians.sollist.user;
+package lu.cerberians.sollist.login;
 
-public class UserForm {
+public class LoginForm {
 
     private String firstname;
     private String lastname;
