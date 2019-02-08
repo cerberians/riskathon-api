@@ -21,7 +21,7 @@
 <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
 <div layout:fragment="content">
     <!-- Content here -->
-    <h1>Asset Functions - Business Roles</h1>
+    <h1><tr th:text="${title}"></tr></h1>
 
     <div>
         <form  th:action="@{/matrix/save}" th:object="${constraintForm}" method="post">
