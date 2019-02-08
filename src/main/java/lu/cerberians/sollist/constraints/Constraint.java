@@ -6,9 +6,10 @@ import lu.cerberians.sollist.entities.Entity;
 
 @Data
 @Builder
-public class ConstraintDto {
+public class Constraint {
+    private String id;
+    private Boolean whitelist;
     private Entity fromEntity;
     private Entity toEntity;
-    private boolean allowed;
 
 }

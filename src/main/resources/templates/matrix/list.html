@@ -12,25 +12,32 @@
     <h1>Asset Functions - Business Roles</h1>
 
     <div>
-        <table class="table table-hover">
-            <thead>
-            <tr class="tableh">
-                <td>Asset Functions</td>
-                <td>Business Role</td>
-            </tr>
-            </thead>
-            <tr th:each="constraint : ${constraintList}">
-                <td th:text="${constraint.fromEntity.name}"></td>
-                <td th:text="${constraint.toEntity.name}"></td>
-                <td >
-                    <input type="checkbox" name="active" th:checked="${constraint.allowed}" />
-                </td>
-            </tr>
-        </table>
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <form  th:action="@{/matrix/save}" th:object="${constraintForm}" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <th> Asset Function</th>
+                    <th> Business Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="constraint, itemStat : *{constraints}">
+                    <td><input th:field="*{constraints[__${itemStat.index}__].fromEntity.name}" /></td>
+                    <td><input th:field="*{constraints[__${itemStat.index}__].toEntity.name}" /></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-10">
+                <button type="submit" name="submit" class="link-button">Submit</button>
+            </div>
+        </form>
+
     </div>
 </div>
+<script>
+function submitConstraints(){
+    window.alert('ok');
+}
+</script>
 </body>
 </html>

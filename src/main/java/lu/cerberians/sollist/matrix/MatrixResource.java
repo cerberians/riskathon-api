@@ -1,13 +1,20 @@
 package lu.cerberians.sollist.matrix;
 
-import lu.cerberians.sollist.entities.*;
+import lu.cerberians.sollist.constraints.ConstraintForm;
+import lu.cerberians.sollist.entities.Asset;
+import lu.cerberians.sollist.entities.AssetFunction;
+import lu.cerberians.sollist.entities.Entitlement;
+import lu.cerberians.sollist.entities.Privilege;
 import lu.cerberians.sollist.mapper.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/matrix")
 public class MatrixResource {
@@ -31,10 +38,9 @@ public class MatrixResource {
         this.matrixService = matrixService;
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response getPrivileges(List<Constraint> constraints) {
-        matrixService.createMatrix(constraints);
+    @PostMapping("/save")
+    public Response createMatrix(@ModelAttribute ConstraintForm constraintForm) {
+        matrixService.createMatrix(constraintForm.getConstraints());
         return Response.ok().build();
     }
 

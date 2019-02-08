@@ -1,7 +1,7 @@
 package lu.cerberians.sollist.matrix;
 
 import lu.cerberians.sollist.ApplicationContext;
-import lu.cerberians.sollist.entities.Constraint;
+import lu.cerberians.sollist.constraints.Constraint;
 import lu.cerberians.sollist.entities.Matrix;
 import lu.cerberians.sollist.mapper.ConstraintMapper;
 import lu.cerberians.sollist.mapper.MatrixMapper;

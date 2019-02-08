@@ -38,18 +38,21 @@ public class ConstraintController {
         for(AssetFunction assetFunction: assetFunctions) {
             map.put(assetFunction, businessRoles);
         }
-        List<ConstraintDto> constraintList = new ArrayList<>();
+        List<Constraint> constraintList = new ArrayList<>();
 
         for(AssetFunction assetFunction : map.keySet()) {
             for (BusinessRole businessRole : map.get(assetFunction)){
-                constraintList .add(ConstraintDto.builder().fromEntity(assetFunction)
+                constraintList .add(Constraint.builder().fromEntity(assetFunction)
                                         .toEntity(businessRole)
-                                        .allowed(false)
+                                        .whitelist(false)
                                         .build());
 
             }
         }
-        model.addAttribute("constraintList", constraintList);
+        model.addAttribute("constraints", constraintList);
+        ConstraintForm constraintForm = new ConstraintForm();
+        constraintForm.getConstraints().addAll(constraintList);
+        model.addAttribute("constraintForm", constraintList);
         return "matrix/list";
     }
 

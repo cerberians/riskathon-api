@@ -2,6 +2,7 @@ package lu.cerberians.sollist.entities;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lu.cerberians.sollist.constraints.Constraint;
 
 import java.util.List;
 
