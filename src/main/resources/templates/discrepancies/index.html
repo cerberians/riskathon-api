@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>Discrepancies</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Content here -->
+    <h1>SOLL/IST Discrepancies</h1>
+
+    <div class="row">
+        <form action="#" th:action="@{/discrepancies}" th:object="${form}" method="post">
+            <table class="table table-hover table-striped">
+                <thead class="orange accent-4 white-text bold">
+                    <tr>
+                        <th>Account</th>
+                        <th>Business Role</th>
+                        <th>Asset Function</th>
+                        <th>Add to SOLL</th>
+                        <th>Remove from IST</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item, itemStat : *{discrepancies}">
+                        <td th:text="${item.acc}"></td>
+                        <td th:text="${item.br}"></td>
+                        <td th:text="${item.af}"></td>
+                        <td><input type="checkbox" th:value="*{discrepancies[__${itemStat.index}__].addToSoll}" th:field="*{discrepancies[__${itemStat.index}__].addToSoll}" /></td>
+                        <td><input type="checkbox" th:value="*{discrepancies[__${itemStat.index}__].removeFromIst}" th:field="*{discrepancies[__${itemStat.index}__].removeFromIst}" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary" value="Create">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

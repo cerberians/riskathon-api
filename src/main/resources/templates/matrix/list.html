@@ -37,7 +37,7 @@
                 <tr th:each="c: ${constraints}">
                     <td th:value="${c.fromEntity.name}" th:text="${c.fromEntity.name}" ></td>
                     <td th:value="${c.toEntity.name}" th:text="${c.toEntity.name}"></td>
-                    <input class="fromEntityId" type="hidden" th:value="${c.fromEntity.id}" />
+                    <input class="fromEntityId" type="hidden" th:field="" th:value="${c.fromEntity.id}" />
                     <input class="toEntityId" type="hidden" th:value="${c.toEntity.id}" />
                     <td>
                         <input class="whitelist" type="checkbox" th:value="${c.whitelist}"/>
