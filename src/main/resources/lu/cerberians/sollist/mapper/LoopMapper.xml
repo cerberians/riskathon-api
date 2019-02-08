@@ -16,4 +16,17 @@
         RETURN account.id as acc, af.id as af, br.id as br
     </select>
 
+    <insert id="fixDiscrepancies">
+        MATCH (br:BusinessRole {id: #{loop.br}}), (af:AssetFunction {id: #{loop.af}}), (c:Constraint), (b:Blacklist),(w:Whitelist)
+        WHERE (br)<![CDATA[<-]]>[:FROM]-(c)-[:TO]->(af)
+
+        <!-- Remove blacklist link -->
+        MATCH (c)-[r:IS_TYPE]->(b)
+        DELETE r
+
+        <!-- Add whitelist link -->
+        CREATE (c)-[i:IS_TYPE]->(w)
+        RETURN br, af, c, b, w
+    </insert>
+
 </mapper>

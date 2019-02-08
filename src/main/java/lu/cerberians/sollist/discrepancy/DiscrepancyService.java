@@ -2,6 +2,7 @@ package lu.cerberians.sollist.discrepancy;
 
 import lu.cerberians.sollist.entities.Loop;
 import lu.cerberians.sollist.mapper.LoopMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -22,5 +23,9 @@ public class DiscrepancyService {
         List<Loop> nok = loopMapper.blacklist();
         nok.removeAll(ok);
         return nok;
+    }
+
+    public void fixDiscrepancies(Loop loop) {
+        loopMapper.fixDiscrepancies(loop);
     }
 }
