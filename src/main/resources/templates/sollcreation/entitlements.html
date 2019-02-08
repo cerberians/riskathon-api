@@ -29,6 +29,37 @@
             </li>
         </ul>
     </div>
+    <div class="row justify-content-center">
+        <div class="col col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Create an entitlement</h5>
+
+                    <form
+                            th:object="${form}"
+                            th:action="@{/entitlements/create}"
+                            method="post">
+
+                        <div class="md-form">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}">
+                        </div>
+
+                        <div>
+                            <label for="privilege">Privilege type</label><br/>
+                            <select id="privilege" class="browser-default" th:field="*{privilege.id}">
+                                <option th:each="privilege : ${privileges}" th:value="${privilege.id}" th:text="${privilege.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-primary" value="Create">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

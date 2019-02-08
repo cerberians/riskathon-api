@@ -1,8 +1,10 @@
 package lu.cerberians.sollist.applications;
 
 import lu.cerberians.sollist.ApplicationContext;
+import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.mapper.ApplicationMapper;
 import lu.cerberians.sollist.mapper.AssetMapper;
+import lu.cerberians.sollist.mapper.PrivilegeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,19 @@ public class ApplicationsController {
     private ApplicationMapper applicationMapper;
     private AssetMapper assetMapper;
     private ApplicationContext applicationContext;
+    private PrivilegeMapper privilegeMapper;
 
     @Autowired
-    public ApplicationsController(ApplicationsConverter converter, ApplicationMapper applicationMapper, ApplicationContext applicationContext, AssetMapper assetMapper) {
+    public ApplicationsController(ApplicationsConverter converter,
+                                  ApplicationMapper applicationMapper,
+                                  ApplicationContext applicationContext,
+                                  AssetMapper assetMapper,
+                                  PrivilegeMapper privilegeMapper) {
         this.converter = converter;
         this.applicationMapper = applicationMapper;
         this.applicationContext = applicationContext;
         this.assetMapper = assetMapper;
+        this.privilegeMapper = privilegeMapper;
     }
 
     @RequestMapping("")
@@ -46,9 +54,11 @@ public class ApplicationsController {
 
 
     @RequestMapping(value = "/create/soll/{assetID}")
-    public String createSoll(@PathVariable int assetID){
+    public String createSoll(@PathVariable int assetID, Model model){
         log.debug("CREATE SOLL FOR assetid:" + assetID);
         applicationContext.setAsset(assetMapper.selectById(Integer.toString(assetID)));
+        model.addAttribute("privileges", privilegeMapper.selectAll());
+        model.addAttribute("form", new Entitlement());
         return "sollcreation/entitlements";
     }
 
