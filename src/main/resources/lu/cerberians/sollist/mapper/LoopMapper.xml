@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lu.cerberians.sollist.mapper.LoopMapper">
+
+    <select id="whitelist" resultType="lu.cerberians.sollist.entities.Loop">
+        MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<![CDATA[<-]]>[:TO]-(constraint:Constraint)-[:FROM]->(br:BusinessRole)<![CDATA[<-]]>[:HAS_ROLE]-(account),
+        (constraint)-[:IS_TYPE]->(:Whitelist)
+        RETURN account.id as acc, af.id as af, br.id as br
+    </select>
+
+    <select id="blacklist" resultType="lu.cerberians.sollist.entities.Loop">
+        MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<![CDATA[<-]]>[:TO]-(constraint:Constraint)-[:FROM]->(br:BusinessRole)<![CDATA[<-]]>[:HAS_ROLE]-(account),
+        (constraint)-[:IS_TYPE]->(:Blacklist)
+        RETURN account.id as acc, af.id as af, br.id as br
+    </select>
+
+</mapper>

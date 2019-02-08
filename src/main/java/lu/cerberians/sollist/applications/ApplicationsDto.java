@@ -11,9 +11,10 @@ public class ApplicationsDto {
     private String assetOwner;
     private String businessRole;
     private boolean soll;
+    private boolean ist;
     private boolean sollist;
 
-    public ApplicationsDto(int sollId, int appId, int assetId, String application, String assetName, String assetType, String assetOwner, String businessRole, boolean soll, boolean sollist) {
+    public ApplicationsDto(int sollId, int appId, int assetId, String application, String assetName, String assetType, String assetOwner, String businessRole, boolean soll, boolean ist,boolean sollist) {
         this.sollId = sollId;
         this.appId = appId;
         this.assetId = assetId;
@@ -24,6 +25,7 @@ public class ApplicationsDto {
         this.assetOwner = assetOwner;
         this.businessRole = businessRole;
         this.soll = soll;
+        this.ist = ist;
         this.sollist = sollist;
     }
 
@@ -108,6 +110,14 @@ public class ApplicationsDto {
 
     public void setAssetId(int assetId) {
         this.assetId = assetId;
+    }
+
+    public boolean isIst() {
+        return ist;
+    }
+
+    public void setIst(boolean ist) {
+        this.ist = ist;
     }
 }
 

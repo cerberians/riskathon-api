@@ -25,7 +25,7 @@
 
     <div>
         <form  th:action="@{/matrix/save}" th:object="${constraintForm}" method="post">
-            <input type="hidden" id="fconstraints" th:name="fconstraints" th:value="${constraints}"/>
+            <input type="hidden" id="fconstraints" th:name="fconstraints"/>
             <table>
                 <thead>
                 <tr>
@@ -35,10 +35,10 @@
                 </thead>
                 <tbody id="matrix">
                 <tr th:each="c: ${constraints}">
-                    <td><input th:value="${c.fromEntity.name}"/></td>
-                    <td><input th:value="${c.toEntity.name}"/></td>
-                    <input class="fromEntityId" type="hidden" th:value="${c.fromEntity.id}"/>
-                    <input class="toEntityId" type="hidden" th:value="${c.toEntity.id}"/>
+                    <td th:value="${c.fromEntity.name}" th:text="${c.fromEntity.name}" ></td>
+                    <td th:value="${c.toEntity.name}" th:text="${c.toEntity.name}"></td>
+                    <input class="fromEntityId" type="hidden" th:value="${c.fromEntity.id}" />
+                    <input class="toEntityId" type="hidden" th:value="${c.toEntity.id}" />
                     <td>
                         <input class="whitelist" type="checkbox" th:value="${c.whitelist}"/>
                     </td>

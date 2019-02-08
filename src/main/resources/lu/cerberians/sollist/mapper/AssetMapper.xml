@@ -7,7 +7,7 @@
     <select id="selectById" resultType="lu.cerberians.sollist.entities.Asset">
         MATCH (asset:Asset)
         WHERE (asset.id = #{id})
-        RETURN asset.id as id,
+        RETURN asset.id as id
             asset.name as name
     </select>
 
