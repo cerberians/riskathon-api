@@ -1,21 +1,17 @@
 package lu.cerberians.sollist.constraints;
 
-import javax.validation.Valid;
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class ConstraintForm {
 
-    @Valid
-    private List<Constraint> constraints = new ArrayList<>();
-
-    public ConstraintForm() {
-    }
+    private List<Constraint> constraints;
+    private String fconstraints;
 
     public List<Constraint> getConstraints() {
-return constraints;    }
-
-    public void setConstraints(List<Constraint> constraints) {
-        this.constraints = constraints;
+        return constraints != null ? constraints: new ArrayList<>();
     }
 }

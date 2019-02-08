@@ -30,6 +30,7 @@ public class ConstraintController {
     @GetMapping
     public String list(Model model) {
        List<AssetFunction> assetFunctions = assetFunctionService.getAll();
+
         List<BusinessRole> businessRoles =  businessRoleService.getAll();
         Map<AssetFunction, List<BusinessRole>> map = new HashMap<>();
         for(AssetFunction assetFunction: assetFunctions) {

@@ -6,8 +6,11 @@ import lu.cerberians.sollist.entities.AssetFunction;
 import lu.cerberians.sollist.entities.Entitlement;
 import lu.cerberians.sollist.entities.Privilege;
 import lu.cerberians.sollist.mapper.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -16,7 +19,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/matrix")
+@Controller
+@RequestMapping("/matrix")
 public class MatrixResource {
 
     private PrivilegeMapper privilegeMapper;
@@ -38,8 +42,8 @@ public class MatrixResource {
         this.matrixService = matrixService;
     }
 
-    @PostMapping(value = "/save")
-    public Response createMatrix(@ModelAttribute ConstraintForm constraintForm) {
+    @RequestMapping(value="/save", method = RequestMethod.POST )
+    public Response createMatrix(ConstraintForm constraintForm) {
         matrixService.createMatrix(constraintForm.getConstraints());
         return Response.ok().build();
     }
