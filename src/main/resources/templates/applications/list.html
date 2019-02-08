@@ -17,6 +17,7 @@
                     <td>Asset Owner</td>
                     <td>Business roles</td>
                     <td>SOLL</td>
+                    <td>IST</td>
                     <td>SOLL/IST</td>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                             <a th:text="${app.soll}" th:href="@{'/applications/create/soll/'+${app.assetId}}"></a>
                         </span>
                     </td>
+                    <td th:text="${app.ist}"></td>
                     <td th:text="${app.sollist}"></td>
                 </tr>
             </tbody>
