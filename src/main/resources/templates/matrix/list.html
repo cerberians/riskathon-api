@@ -19,16 +19,22 @@
                 <tr>
                     <th>Asset Function</th>
                     <th>Business Role</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="c, rowStat : *{constraints}"	th:class="${rowStat.even ? 'even' : 'odd'}">
-                    <td  th:text="*{constraints[__${rowStat.index}__].fromEntity.name}" ></td>
-                    <td th:text="*{constraints[__${rowStat.index}__].toEntity.name}" ></td>
-                    <td >
-                        <input type="checkbox" name="active" th:checked="*{constraints[__${rowStat.index}__].whitelist}" />
+                    <td><input type="text" th:field="*{constraints[__${rowStat.index}__].fromEntity.name}" readonly="readonly" /></td>
+                    <td><input type="text" th:field="*{constraints[__${rowStat.index}__].toEntity.name}" readonly="readonly"/></td>
+                    <td>
+                        <input type="checkbox"  th:field="*{constraints[__${rowStat.index}__].whitelist}" />
                     </td>
+                    <td><input hidden type="text" th:field="*{constraints[__${rowStat.index}__].fromEntity.id}" /></td>
+                    <td><input hidden type="text" th:field="*{constraints[__${rowStat.index}__].toEntity.id}" /></td>
+
                 </tr>
                 </tbody>
 
@@ -39,10 +45,5 @@
 
     </div>
 </div>
-<script>
-function submitConstraints(){
-    window.alert('ok');
-}
-</script>
 </body>
 </html>

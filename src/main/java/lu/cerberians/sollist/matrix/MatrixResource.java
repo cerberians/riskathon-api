@@ -38,7 +38,7 @@ public class MatrixResource {
         this.matrixService = matrixService;
     }
 
-    @PostMapping
+    @PostMapping(value = "/save")
     public Response createMatrix(@ModelAttribute ConstraintForm constraintForm) {
         matrixService.createMatrix(constraintForm.getConstraints());
         return Response.ok().build();
