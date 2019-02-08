@@ -66,6 +66,7 @@ CREATE (m:Matrix:SOLL {id: "m1"});
 CREATE (c:Constraint {id: "c1"});
 CREATE (c:Constraint {id: "c2"});
 CREATE (c:Constraint {id: "c3"});
+CREATE (c:Constraint {id: "c4"});
 
 MATCH (c:Constraint {id: "c1"}), (n:Whitelist {id: "Whitelist"})
 CREATE (c)-[:IS_TYPE]->(n);
@@ -135,6 +136,19 @@ CREATE (acc)-[:HAS_FUNCTION]->(af);
 
 MATCH (af:AssetFunction {id: "af2"}), (acc:Account {id: "acc3"})
 CREATE (acc)-[:HAS_FUNCTION]->(af);
+
+
+// For all entities not connected by whitelist, connect by blacklist
+MATCH(af:AssetFunction), (br:BusinessRole), (w:Whitelist)
+  WHERE NOT (af)<-[:TO]-(:Constraint)-[:FROM]->(br)
+WITH af,br
+MATCH (b:Blacklist {id: "Blacklist"})
+CREATE (c:Constraint {id: apoc.create.uuid()})
+CREATE (af)<-[:TO]-(c)-[:FROM]->(br)
+CREATE (c)-[:IS_TYPE]->(b)
+RETURN af,br
+
+
 
 
 MATCH (ct:ConstraintType)<-[:HAS_TYPE]-(c:Constraint)-[:FROM]->(from:BusinessRole),
