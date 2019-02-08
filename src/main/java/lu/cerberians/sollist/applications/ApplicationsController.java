@@ -49,7 +49,7 @@ public class ApplicationsController {
     public String createSoll(@PathVariable int assetID){
         log.debug("CREATE SOLL FOR assetid:" + assetID);
         applicationContext.setAsset(assetMapper.selectById(Integer.toString(assetID)));
-        return "sollcreation/index";
+        return "sollcreation/entitlements";
     }
 
 }
