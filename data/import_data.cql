@@ -146,41 +146,6 @@ MATCH (b:Blacklist {id: "Blacklist"})
 CREATE (c:Constraint {id: apoc.create.uuid()})
 CREATE (af)<-[:TO]-(c)-[:FROM]->(br)
 CREATE (c)-[:IS_TYPE]->(b)
-RETURN af,br
-
-
-
-
-MATCH (ct:ConstraintType)<-[:HAS_TYPE]-(c:Constraint)-[:FROM]->(from:BusinessRole),
-      (c)-[:TO]->(to:AssetFunction),
-      (from)<-[:HAS_ROLE]-(account:Account),
-      (to)<-[:TO]-(:Constraint)-[:FROM]->(:BusinessRole)-[:HAS_ROLE]-(account)
-RETURN ct, e1, e2
-
-
-MATCH (account:Account)-[:HAS_ROLE]->(br:BusinessRole)<-[:FROM]-(constraint:Constraint),
-      (account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint)
-RETURN account
-
-MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint),
-      (constraint)-[:FROM]->(br)<-[]-(account)
-RETURN account
-
-MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint),
-      (constraint)-[:FROM]->(br)<-[]-(account)
-RETURN account, br, af, constraint
-
-MATCH (af:AssetFunction)<-[:HAS_FUNCTION]-(account:Account),
-      (af)<-[:TO]-(constraint)-[:FROM]->(br:BusinessRole)
-WHERE NOT (br)<-[:HAS_ROLE]-(account)
-RETURN account
-
-
-
-// Give the af and br not satisfied
-MATCH (af:AssetFunction)<-[:HAS_FUNCTION]-(account:Account),
-      (af)<-[:TO]-(constraint)-[:FROM]->(br:BusinessRole)
-  WHERE NOT (br)<-[:HAS_ROLE]-(account)
-RETURN account, br, af
+RETURN af,br;
 
 
