@@ -2,8 +2,10 @@ FROM neo4j:3.4.0
 MAINTAINER florian.sey@gmail.com
 ENV IMPORTDIR /var/lib/neo4j/import/
 ENV IMPORTDATA import_data.cql
+ENV IMPORTSOLL import_soll.cql
 ENV IMPORTINDEXES import_indexes.cql
 COPY data/$IMPORTDATA $IMPORTDIR
+COPY data/$IMPORTSOLL $IMPORTDIR
 COPY data/$IMPORTINDEXES $IMPORTDIR
 COPY scripts/load_data.sh /var/lib/neo4j
 RUN apk update && apk add curl jq

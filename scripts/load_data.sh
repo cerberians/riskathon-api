@@ -36,6 +36,11 @@ function load_data() {
         --username ${NEO4J_USERNAME} \
         --password ${NEO4J_PASSWORD} \
         < import/${IMPORTDATA}
+    bin/cypher-shell \
+        --address bolt://riskathon-neo4j:7687 \
+        --username ${NEO4J_USERNAME} \
+        --password ${NEO4J_PASSWORD} \
+        < import/${IMPORTSOLL}
 }
 
 function load_indexes() {
