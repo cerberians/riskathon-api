@@ -47,22 +47,25 @@ MATCH (n) DETACH DELETE n;
 //  WHERE asset.id = row.id AND type.id = row.idType
 //CREATE (asset)-[relation:HAS_TYPE]->(type);
 
-CREATE (n:Blacklist {id: "Blacklist", name: "Blacklist"}) RETURN n;
-CREATE (n:Whitelist {id: "Whitelist", name: "Whitelist"}) RETURN n;
+CREATE (n:Blacklist:ConstraintType {id: "Blacklist", name: "Blacklist"}) RETURN n;
+CREATE (n:Whitelist:ConstraintType {id: "Whitelist", name: "Whitelist"}) RETURN n;
 
 // TEST DATA FOR DISCREPANCY CHECK
 
 // Entities
 CREATE (br:BusinessRole {id: "br1", name: "br1"});
 CREATE (br:BusinessRole {id: "br2", name: "br2"});
+CREATE (br:BusinessRole {id: "br3", name: "br3"});
 
 CREATE (:AssetFunction {id: "af1", name: "af1"});
 CREATE (:AssetFunction {id: "af2", name: "af2"});
+CREATE (:AssetFunction {id: "af3", name: "af3"});
 
 // SOLL
 CREATE (m:Matrix:SOLL {id: "m1"});
 CREATE (c:Constraint {id: "c1"});
 CREATE (c:Constraint {id: "c2"});
+CREATE (c:Constraint {id: "c3"});
 
 MATCH (c:Constraint {id: "c1"}), (n:Whitelist {id: "Whitelist"})
 CREATE (c)-[:IS_TYPE]->(n);
@@ -70,10 +73,22 @@ CREATE (c)-[:IS_TYPE]->(n);
 MATCH (c:Constraint {id: "c2"}), (n:Whitelist {id: "Whitelist"})
 CREATE (c)-[:IS_TYPE]->(n);
 
+MATCH (c:Constraint {id: "c3"}), (n:Whitelist {id: "Whitelist"})
+CREATE (c)-[:IS_TYPE]->(n);
+
+MATCH (c:Constraint {id: "c4"}), (n:Whitelist {id: "Whitelist"})
+CREATE (c)-[:IS_TYPE]->(n);
+
 MATCH (m:Matrix:SOLL {id: "m1"}), (c:Constraint {id: "c1"})
 CREATE (m)-[:HAS_CONSTRAINT]->(c);
 
 MATCH (m:Matrix:SOLL {id: "m1"}), (c:Constraint {id: "c2"})
+CREATE (m)-[:HAS_CONSTRAINT]->(c);
+
+MATCH (m:Matrix:SOLL {id: "m1"}), (c:Constraint {id: "c3"})
+CREATE (m)-[:HAS_CONSTRAINT]->(c);
+
+MATCH (m:Matrix:SOLL {id: "m1"}), (c:Constraint {id: "c4"})
 CREATE (m)-[:HAS_CONSTRAINT]->(c);
 
 MATCH (br:BusinessRole {id: "br1"}), (af:AssetFunction {id: "af1"}), (c:Constraint {id: "c1"})
@@ -84,11 +99,26 @@ MATCH (br:BusinessRole {id: "br2"}), (af:AssetFunction {id: "af2"}), (c:Constrai
 CREATE (c)-[:FROM]->(br)
 CREATE (c)-[:TO]->(af);
 
+MATCH (br:BusinessRole {id: "br3"}), (af:AssetFunction {id: "af3"}), (c:Constraint {id: "c3"})
+CREATE (c)-[:FROM]->(br)
+CREATE (c)-[:TO]->(af);
+
+MATCH (br:BusinessRole {id: "br2"}), (af:AssetFunction {id: "af1"}), (c:Constraint {id: "c4"})
+CREATE (c)-[:FROM]->(br)
+CREATE (c)-[:TO]->(af);
+
 // IST
 CREATE (:Account {id: "acc1", name: "acc1"});
 CREATE (:Account {id: "acc2", name: "acc2"});
+CREATE (:Account {id: "acc3", name: "acc3"});
 
 MATCH (br:BusinessRole {id: "br1"}), (acc:Account {id: "acc1"})
+CREATE (acc)-[:HAS_ROLE]->(br);
+
+MATCH (br:BusinessRole {id: "br1"}), (acc:Account {id: "acc3"})
+CREATE (acc)-[:HAS_ROLE]->(br);
+
+MATCH (br:BusinessRole {id: "br3"}), (acc:Account {id: "acc1"})
 CREATE (acc)-[:HAS_ROLE]->(br);
 
 MATCH (br:BusinessRole {id: "br2"}), (acc:Account {id: "acc2"})
@@ -97,8 +127,46 @@ CREATE (acc)-[:HAS_ROLE]->(br);
 MATCH (af:AssetFunction {id: "af1"}), (acc:Account {id: "acc1"})
 CREATE (acc)-[:HAS_FUNCTION]->(af);
 
+MATCH (af:AssetFunction {id: "af3"}), (acc:Account {id: "acc1"})
+CREATE (acc)-[:HAS_FUNCTION]->(af);
+
 MATCH (af:AssetFunction {id: "af1"}), (acc:Account {id: "acc2"})
 CREATE (acc)-[:HAS_FUNCTION]->(af);
 
+MATCH (af:AssetFunction {id: "af2"}), (acc:Account {id: "acc3"})
+CREATE (acc)-[:HAS_FUNCTION]->(af);
+
+
+MATCH (ct:ConstraintType)<-[:HAS_TYPE]-(c:Constraint)-[:FROM]->(from:BusinessRole),
+      (c)-[:TO]->(to:AssetFunction),
+      (from)<-[:HAS_ROLE]-(account:Account),
+      (to)<-[:TO]-(:Constraint)-[:FROM]->(:BusinessRole)-[:HAS_ROLE]-(account)
+RETURN ct, e1, e2
+
+
+MATCH (account:Account)-[:HAS_ROLE]->(br:BusinessRole)<-[:FROM]-(constraint:Constraint),
+      (account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint)
+RETURN account
+
+MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint),
+      (constraint)-[:FROM]->(br)<-[]-(account)
+RETURN account
+
+MATCH (account:Account)-[:HAS_FUNCTION]->(af:AssetFunction)<-[:TO]-(constraint),
+      (constraint)-[:FROM]->(br)<-[]-(account)
+RETURN account, br, af, constraint
+
+MATCH (af:AssetFunction)<-[:HAS_FUNCTION]-(account:Account),
+      (af)<-[:TO]-(constraint)-[:FROM]->(br:BusinessRole)
+WHERE NOT (br)<-[:HAS_ROLE]-(account)
+RETURN account
+
+
+
+// Give the af and br not satisfied
+MATCH (af:AssetFunction)<-[:HAS_FUNCTION]-(account:Account),
+      (af)<-[:TO]-(constraint)-[:FROM]->(br:BusinessRole)
+  WHERE NOT (br)<-[:HAS_ROLE]-(account)
+RETURN account, br, af
 
 
