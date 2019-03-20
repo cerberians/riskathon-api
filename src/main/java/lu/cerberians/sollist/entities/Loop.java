@@ -12,6 +12,9 @@ public class Loop {
     private String af;
     private String br;
 
+    private boolean addToSoll;
+    private boolean removeFromIst;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

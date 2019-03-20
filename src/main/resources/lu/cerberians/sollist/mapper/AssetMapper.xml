@@ -8,7 +8,7 @@
         MATCH (asset:Asset)
         WHERE (asset.id = #{id})
         RETURN asset.id as id,
-        asset.name as name
+            asset.name as name
     </select>
 
 </mapper>
