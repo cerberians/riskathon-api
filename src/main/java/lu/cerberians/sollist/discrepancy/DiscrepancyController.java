@@ -27,7 +27,7 @@ public class DiscrepancyController {
     @GetMapping
     public String index(Model model) {
         final List<Loop> discrepancies = discrepancyService.getDiscrepancies().stream()
-                .peek((item)-> item.setBr(WordUtils.capitalizeFully(item.getBr())))
+                .peek((item) -> item.setBr(WordUtils.capitalizeFully(item.getBr())))
                 .collect(Collectors.toList());
 
         final DiscrepanciesDto discrepanciesDto = new DiscrepanciesDto();
@@ -39,7 +39,12 @@ public class DiscrepancyController {
 
     @PostMapping
     public String fix(@ModelAttribute DiscrepanciesDto form) {
-
+        form.getDiscrepancies().forEach(loop -> {
+            if (loop.isAddToSoll()) {
+                loop.setBr(loop.getBr().toLowerCase());
+                discrepancyService.fixDiscrepancies(loop);
+            }
+        });
         return "redirect:/discrepancies";
     }
 

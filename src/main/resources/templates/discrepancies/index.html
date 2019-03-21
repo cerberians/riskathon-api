@@ -27,6 +27,26 @@
                         <td th:text="${item.acc}"></td>
                         <td th:text="${item.br}"></td>
                         <td th:text="${item.af}"></td>
+
+                        <td style="display:none;">
+                            <input type="text"
+                                   th:value="*{discrepancies[__${itemStat.index}__].acc}"
+                                   th:field="*{discrepancies[__${itemStat.index}__].acc}"/>
+                        </td>
+
+                        <td style="display:none;">
+                            <input type="text"
+                                   th:value="*{discrepancies[__${itemStat.index}__].br}"
+                                   th:field="*{discrepancies[__${itemStat.index}__].br}"/>
+                        </td>
+
+                        <td style="display:none;">
+                            <input type="text"
+                                   th:value="*{discrepancies[__${itemStat.index}__].af}"
+                                   th:field="*{discrepancies[__${itemStat.index}__].af}"/>
+                        </td>
+
+
                         <td><input type="checkbox" th:value="*{discrepancies[__${itemStat.index}__].addToSoll}" th:field="*{discrepancies[__${itemStat.index}__].addToSoll}" /></td>
                         <td><input type="checkbox" th:value="*{discrepancies[__${itemStat.index}__].removeFromIst}" th:field="*{discrepancies[__${itemStat.index}__].removeFromIst}" /></td>
                     </tr>
