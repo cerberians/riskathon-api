@@ -27,7 +27,7 @@ public class Application extends SpringBootServletInitializer {
         // By default, assume the asset "1" is selected
         final ApplicationContext applicationContext = new ApplicationContext();
         final Asset asset = new Asset();
-        asset.setId("1");
+        asset.setId("16");
         applicationContext.setAsset(asset);
         return applicationContext;
     }

@@ -20,8 +20,5 @@ spring:
     applicationPath: /api
   main:
     allow-bean-definition-overriding: true
-  mvc:
-    servlet:
-      path: /
 
 jasypt.encryptor.password: ${JASYPT_ENCRYPTOR_PASSWORD}
